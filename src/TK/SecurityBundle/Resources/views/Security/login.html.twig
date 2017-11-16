@@ -21,7 +21,7 @@
                 <div style="padding-top:30px" class="panel-body" >
 
                     {% if error %}
-                        <div class="alert alert-danger col-sm-12" style="text-align: center; font-size: 20px; font-weight: normal">{{ error.message }}</div>
+                        <div class="text-danger col-sm-12" style="text-align: center; font-size: 20px; font-weight: normal; margin-bottom: 20px">{{ error.message|trans({},'messages') }}<br></div>
                     {% endif %}
 
                     <form action="{{ path('login_check') }}" method="post"  id="loginform" class="form-horizontal" role="form">
