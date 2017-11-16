@@ -1,0 +1,3 @@
+tk_core_homepage:
+    path:     /
+    defaults: { _controller: TKCoreBundle:Default:index }

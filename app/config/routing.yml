@@ -1,3 +1,22 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+tk_cours:
+    resource: "@TKCoursBundle/Resources/config/routing.yml"
+    prefix:   /cours
+
+tk_utilisateur:
+    resource: "@TKUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /utilisateurs
+
+tk_core:
+    resource: "@TKCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    path:    /login
+    defaults: { _controller: TKSecurityBundle:Security:login}
+
+
+login_check:
+    path:    /login_check
+
+logout:
+    path:    /logout

@@ -1,0 +1,3 @@
+tk_utilisateur_homepage:
+    path:     /
+    defaults: { _controller: TKUtilisateurBundle:Default:index }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}{{ nom_site }}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/jquery-ui.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/jquery-ui.structure.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/jquery-ui.theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/style.css') }}">
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/js/jquery-ui.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/js/jquery-sortable.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/js/bootstrap-datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/locales/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ocgestion/js/bootstrap.min.js') }}"></script>
+
+</head>
+
+<body>
+
+        <header>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                            <span class="sr-only">navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ path('oc_gestion_home') }}">{{ nom_site }}</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{  path('oc_student_all_students') }}" title="gestion des élèves">Elèves</a></li>
+                            <li><a href="{{  path('oc_teacher_all_teachers') }}" title="gestion des professeurs">Professeurs</a></li>
+                            <li><a href="{{  path('oc_classe_all_classe') }}" title="gestion des classes">Classes</a></li>
+                            <li><a href="#" title="gestion des notes">Notes</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ path('oc_gestion_profil') }}" title="Mon Profil"><span class="text-info nameProfile">{{ app.user.prenom }}</span></a></li>
+                            <li><a href="{{ path('logout') }}" title="Se déconnecter">Déconnexion</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <br><br>
+        </header>
+
+
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

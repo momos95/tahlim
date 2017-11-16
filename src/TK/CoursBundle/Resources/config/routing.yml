@@ -1,0 +1,3 @@
+tk_cours_homepage:
+    path:     /
+    defaults: { _controller: TKCoursBundle:Default:index }

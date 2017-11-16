@@ -1,0 +1,3 @@
+tk_security_homepage:
+    path:     /
+    defaults: { _controller: TKSecurityBundle:Default:index }

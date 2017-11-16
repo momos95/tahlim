@@ -1,0 +1,4 @@
+services:
+#    tk_core.example:
+#        class: TK\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
