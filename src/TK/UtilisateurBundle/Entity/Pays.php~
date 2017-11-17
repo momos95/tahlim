@@ -1,0 +1,61 @@
+<?php
+
+namespace TK\UtilisateurBundle\Entity ;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Pays
+ *
+ * @ORM\Table(name="pays")
+ * @ORM\Entity
+ */
+class Pays
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_pays", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPays;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="code", type="integer", nullable=false)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alpha2", type="string", length=2, nullable=false)
+     */
+    private $alpha2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alpha3", type="string", length=3, nullable=false)
+     */
+    private $alpha3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lib_en", type="string", length=45, nullable=false)
+     */
+    private $libEn;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lib_fr", type="string", length=45, nullable=false)
+     */
+    private $libFr;
+
+
+}
+

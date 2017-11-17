@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new TK\UtilisateurBundle\TKUtilisateurBundle(),
             new TK\CoursBundle\TKCoursBundle(),
             new TK\SecurityBundle\TKSecurityBundle(),
+            new TK\AbonnementBundle\TKAbonnementBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

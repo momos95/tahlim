@@ -1,0 +1,3 @@
+tk_abonnement_homepage:
+    path:     /
+    defaults: { _controller: TKAbonnementBundle:Default:index }

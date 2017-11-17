@@ -1,0 +1,96 @@
+<?php
+
+namespace TK\CoursBundle\Entity ;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cours
+ *
+ * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"})})
+ * @ORM\Entity(repositoryClass="TK\CoursBundle\Repository\CoursRepository")
+ */
+class Cours
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cours", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCours;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=75, nullable=false)
+     */
+    private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="annee", type="string", length=10, nullable=true)
+     */
+    private $annee;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ajoute_par", type="integer", nullable=true)
+     */
+    private $ajoutePar;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime", nullable=true)
+     */
+    private $dateAjout;
+
+    /**
+     * @var \Accessibilite
+     *
+     * @ORM\ManyToOne(targetEntity="Accessibilite")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="acces", referencedColumnName="id_accessibilite")
+     * })
+     */
+    private $acces;
+
+    /**
+     * @var \Format
+     *
+     * @ORM\ManyToOne(targetEntity="Format")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="format", referencedColumnName="id_format")
+     * })
+     */
+    private $format;
+
+    /**
+     * @var \Mois
+     *
+     * @ORM\ManyToOne(targetEntity="Mois")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="mois", referencedColumnName="id_mois")
+     * })
+     */
+    private $mois;
+
+
+    public function __construct(){
+
+        $this->dateAjout = new \DateTime() ;
+    }
+
+}
+

@@ -3,6 +3,8 @@
 parameters:
     #parameter_name: value
     max_item_par_page: 20
+    max_users_per_page: 10
+
 
 services:
     # default configuration for services in *this* file

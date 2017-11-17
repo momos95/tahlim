@@ -1,3 +1,7 @@
+tk_abonnement:
+    resource: "@TKAbonnementBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tk_cours:
     resource: "@TKCoursBundle/Resources/config/routing.yml"
     prefix:   /cours
