@@ -62,7 +62,7 @@ class Abonnement
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="abonnements")
+     * @ORM\ManyToMany(targetEntity="\TK\UtilisateurBundle\Entity\Utilisateur", mappedBy="abonnements")
      */
     private $etudiant;
 
@@ -72,6 +72,8 @@ class Abonnement
     public function __construct()
     {
         $this->etudiant = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->debut = new \DateTime() ;
+        $this->fin = new \DateTime() ;
     }
 
 
@@ -208,11 +210,11 @@ class Abonnement
     /**
      * Add etudiant
      *
-     * @param \TK\AbonnementBundle\Entity\Utilisateur $etudiant
+     * @param \TK\UtilisateurBundle\Entity\Utilisateur $etudiant
      *
      * @return Abonnement
      */
-    public function addEtudiant(\TK\AbonnementBundle\Entity\Utilisateur $etudiant)
+    public function addEtudiant(\TK\UtilisateurBundle\Entity\Utilisateur $etudiant)
     {
         $this->etudiant[] = $etudiant;
 
@@ -222,9 +224,9 @@ class Abonnement
     /**
      * Remove etudiant
      *
-     * @param \TK\AbonnementBundle\Entity\Utilisateur $etudiant
+     * @param \TK\UtilisateurBundle\Entity\Utilisateur $etudiant
      */
-    public function removeEtudiant(\TK\AbonnementBundle\Entity\Utilisateur $etudiant)
+    public function removeEtudiant(\TK\UtilisateurBundle\Entity\Utilisateur $etudiant)
     {
         $this->etudiant->removeElement($etudiant);
     }

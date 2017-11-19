@@ -12,7 +12,7 @@ class SecurityController extends Controller
     public function loginAction(Request $request){
 
         if($this->get('security.authorization_checker')->isGranted('IS_AUTHENTIFICATED_REMEMBERED')){
-            return $this->redirectToRoute('tk_core') ;
+            return $this->redirectToRoute('tk_core_homepage') ;
         }
 
         $authentificationUtils = $this->get('security.authentication_utils') ;
@@ -27,10 +27,16 @@ class SecurityController extends Controller
         return new Response($content) ;
     }
 
+
     public function forgetAction(){
 
-        $content = $this->get('templating')->render('TKSecurityBundle:Security:forget.html.twig') ;
+        $datas = array(
+            'error'             => false
+        ) ;
+
+        $content = $this->get('templating')->render('TKSecurityBundle:Security:forget.html.twig',$datas) ;
 
         return new Response($content) ;
     }
+
 }

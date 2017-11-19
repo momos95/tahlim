@@ -1,6 +1,6 @@
 tk_abonnement:
     resource: "@TKAbonnementBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /abonnements
 
 tk_cours:
     resource: "@TKCoursBundle/Resources/config/routing.yml"
@@ -17,6 +17,10 @@ tk_core:
 login:
     path:    /login
     defaults: { _controller: TKSecurityBundle:Security:login}
+
+forget:
+    path:    /recovery
+    defaults: { _controller: TKSecurityBundle:Security:forget}
 
 
 login_check:

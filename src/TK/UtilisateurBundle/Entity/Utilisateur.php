@@ -3,6 +3,7 @@
 namespace TK\UtilisateurBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Utilisateur
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="grade_in_assos_idx", columns={"role"}), @ORM\Index(name="etat_abon_in_assos_idx", columns={"abonnement_etat"}), @ORM\Index(name="genre_in_assos_idx", columns={"sexe"}), @ORM\Index(name="pays_in_assos_idx", columns={"pays"})})
  * @ORM\Entity(repositoryClass="TK\UtilisateurBundle\Repository\UtilisateurRepository")
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @var integer
@@ -66,7 +67,7 @@ class Utilisateur
     /**
      * @var \TK\AbonnementBundle\Entity\EtatAbonnement
      *
-     * @ORM\ManyToOne(targetEntity="EtatAbonnement")
+     * @ORM\ManyToOne(targetEntity="\TK\AbonnementBundle\Entity\EtatAbonnement")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="abonnement_etat", referencedColumnName="id_etat")
      * })
@@ -106,7 +107,7 @@ class Utilisateur
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Abonnement", inversedBy="etudiant")
+     * @ORM\ManyToMany(targetEntity="\TK\AbonnementBundle\Entity\Abonnement", inversedBy="etudiant")
      * @ORM\JoinTable(name="etudiants_abonnements",
      *   joinColumns={
      *     @ORM\JoinColumn(name="etudiant", referencedColumnName="id")
@@ -117,6 +118,12 @@ class Utilisateur
      * )
      */
     private $abonnements;
+
+
+    /**
+     * array of roles
+     */
+    private $roles ;
 
     /**
      * Constructor
@@ -382,11 +389,11 @@ class Utilisateur
     /**
      * Add abonnement
      *
-     * @param \TK\UtilisateurBundle\Entity\Abonnement $abonnement
+     * @param \TK\AbonnementBundle\Entity\Abonnement $abonnement
      *
      * @return Utilisateur
      */
-    public function addAbonnement(\TK\UtilisateurBundle\Entity\Abonnement $abonnement)
+    public function addAbonnement(\TK\AbonnementBundle\Entity\Abonnement $abonnement)
     {
         $this->abonnements[] = $abonnement;
 
@@ -396,9 +403,9 @@ class Utilisateur
     /**
      * Remove abonnement
      *
-     * @param \TK\UtilisateurBundle\Entity\Abonnement $abonnement
+     * @param \TK\AbonnementBundle\Entity\Abonnement $abonnement
      */
-    public function removeAbonnement(\TK\UtilisateurBundle\Entity\Abonnement $abonnement)
+    public function removeAbonnement(\TK\AbonnementBundle\Entity\Abonnement $abonnement)
     {
         $this->abonnements->removeElement($abonnement);
     }
@@ -412,4 +419,38 @@ class Utilisateur
     {
         return $this->abonnements;
     }
+
+    public function getRoles()
+    {
+        return array($this->role->getLibGrade()) ;
+    }
+
+    public function setRoles(array $roles){
+        $this->roles = $roles ;
+    }
+
+    public function getPassword()
+    {
+        return $this->getMdp() ;
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function has_role($roles){
+
+    }
+
 }
