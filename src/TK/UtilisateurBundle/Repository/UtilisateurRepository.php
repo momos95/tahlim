@@ -15,7 +15,8 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
     {
         $q = $this->_em->createQueryBuilder()
             ->select('utilisateur')
-            ->from('TKUtilisateurBundle:Utilisateur','utilisateur');
+            ->from('TKUtilisateurBundle:Utilisateur','utilisateur')
+            ->where('utilisateur.role <> 3') ;
 
         $q->setFirstResult(($page-1) * $maxperpage)
             ->setMaxResults($maxperpage);

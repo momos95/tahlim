@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
-    max_item_par_page: 20
+    max_item_per_page: 20
     max_users_per_page: 10
 
 

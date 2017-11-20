@@ -4,6 +4,7 @@ namespace TK\UtilisateurBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Utilisateur
@@ -47,7 +48,13 @@ class Utilisateur implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100, nullable=false)
+     *
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
+
     private $email;
 
     /**
@@ -293,11 +300,11 @@ class Utilisateur implements UserInterface
     /**
      * Set abonnementEtat
      *
-     * @param \TK\UtilisateurBundle\Entity\EtatAbonnement $abonnementEtat
+     * @param \TK\AbonnementBundle\Entity\EtatAbonnement $abonnementEtat
      *
      * @return Utilisateur
      */
-    public function setAbonnementEtat(\TK\UtilisateurBundle\Entity\EtatAbonnement $abonnementEtat = null)
+    public function setAbonnementEtat(\TK\AbonnementBundle\Entity\EtatAbonnement $abonnementEtat = null)
     {
         $this->abonnementEtat = $abonnementEtat;
 
@@ -307,7 +314,7 @@ class Utilisateur implements UserInterface
     /**
      * Get abonnementEtat
      *
-     * @return \TK\UtilisateurBundle\Entity\EtatAbonnement
+     * @return \TK\AbonnementBundle\Entity\EtatAbonnement
      */
     public function getAbonnementEtat()
     {

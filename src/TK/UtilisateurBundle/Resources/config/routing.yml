@@ -1,3 +1,21 @@
 tk_utilisateur_homepage:
-    path:     /
-    defaults: { _controller: TKUtilisateurBundle:Default:index }
+    path:     /liste/{page}
+    defaults: { _controller: TKUtilisateurBundle:Utilisateur:all, page: 1 }
+
+tk_utilisateur_add:
+    path:     /add
+    defaults: { _controller: TKUtilisateurBundle:Utilisateur:add}
+
+tk_utilisateur_view:
+    path:    /view/{id}
+    defaults:
+        _controller: TKUtilisateurBundle:Utilisateur:view
+    requirements:
+        id: \d+
+
+tk_utilisateur_delete:
+    path:    /delete/{id}
+    defaults:
+        _controller: TKUtilisateurBundle:Utilisateur:delete
+    requirements:
+        id: \d+

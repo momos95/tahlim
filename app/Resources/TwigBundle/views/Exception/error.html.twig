@@ -6,9 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>{% block title %}{{ nom_site }}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/ocgestion/css/error.css') }}">
-	<script type="text/javascript" src="{{ asset('bundles/ocgestion/js/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/ocgestion/js/bootstrap.min.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/tkcore/css/error.css') }}">
+	<script type="text/javascript" src="{{ asset('bundles/tkcore/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/tkcore/js/bootstrap.min.js') }}"></script>
 </head>
 <body>
 <!--start-wrap--->
@@ -22,7 +22,7 @@
 	<!---End-header---->
 	<!--start-content------>
 	<div class="content">
-		<img src="{{ asset('bundles/ocgestion/images/error-img.png') }}" title="error" />
+		<img src="{{ asset('bundles/tkcore/images/error-img.png') }}" title="error" />
 		<p><span><label>O</label>hh.....</span>La page que vous demandez n'existe pas !!!</p>
 		<a href="{{ path('oc_gestion_home') }}">Retourner à l'accueil</a>
 	</div>
