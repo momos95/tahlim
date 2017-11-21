@@ -1,13 +1,13 @@
 <?php
 
 namespace TK\CoursBundle\Entity ;
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
+
 /**
  * Cours
  *
- * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"})})
+ * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"}), @ORM\Index(name="ajoute_par", columns={"ajoute_par"})})
  * @ORM\Entity(repositoryClass="TK\CoursBundle\Repository\CoursRepository")
  */
 class Cours
@@ -43,18 +43,29 @@ class Cours
     private $annee;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ajoute_par", type="integer", nullable=true)
-     */
-    private $ajoutePar;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_ajout", type="datetime", nullable=true)
      */
     private $dateAjout;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string", length=100, nullable=true)
+     * @Assert\File(mimeTypes={"application/pdf"})
+     */
+    private $file;
+
+    /**
+     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="\TK\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ajoute_par", referencedColumnName="id")
+     * })
+     */
+    private $ajoutePar;
 
     /**
      * @var \Accessibilite
@@ -67,14 +78,6 @@ class Cours
     private $acces;
 
     /**
-     *
-     * @ORM\Column(name="file", type="string", length=10, nullable=true)
-     * @Assert\NotBlank(message="Veuillez inclure le fichier de cours s'il vous plaît.")
-     * @Assert\File(mimeTypes={"application/pdf"})
-     */
-    private $file;
-
-    /**
      * @var \Format
      *
      * @ORM\ManyToOne(targetEntity="Format")
@@ -82,10 +85,7 @@ class Cours
      *   @ORM\JoinColumn(name="format", referencedColumnName="id_format")
      * })
      */
-
-
     private $format;
-
 
     /**
      * @var \Mois
@@ -98,20 +98,11 @@ class Cours
     private $mois;
 
 
-    public function __construct(){
 
-        $this->dateAjout = new \DateTime() ;
-    }
-
-
-    /**
-     * Get idCours
-     *
-     * @return integer
-     */
-    public function getIdCours()
+    public function __construct()
     {
-        return $this->idCours;
+        $this->dateAjout = new \DateTime() ;
+        $this->annee = date('Y') ;
     }
 
     /**
@@ -187,30 +178,6 @@ class Cours
     }
 
     /**
-     * Set ajoutePar
-     *
-     * @param integer $ajoutePar
-     *
-     * @return Cours
-     */
-    public function setAjoutePar($ajoutePar)
-    {
-        $this->ajoutePar = $ajoutePar;
-
-        return $this;
-    }
-
-    /**
-     * Get ajoutePar
-     *
-     * @return integer
-     */
-    public function getAjoutePar()
-    {
-        return $this->ajoutePar;
-    }
-
-    /**
      * Set dateAjout
      *
      * @param \DateTime $dateAjout
@@ -235,51 +202,37 @@ class Cours
     }
 
     /**
-     * Set acces
+     * Set file
      *
-     * @param \TK\CoursBundle\Entity\Accessibilite $acces
+     * @param string $file
      *
      * @return Cours
      */
-    public function setAcces(\TK\CoursBundle\Entity\Accessibilite $acces = null)
+    public function setFile($file)
     {
-        $this->acces = $acces;
+        $this->file = $file;
 
         return $this;
     }
 
     /**
-     * Get acces
+     * Get file
      *
-     * @return \TK\CoursBundle\Entity\Accessibilite
+     * @return string
      */
-    public function getAcces()
+    public function getFile()
     {
-        return $this->acces;
+        return $this->file;
     }
 
     /**
-     * Set format
+     * Get idCours
      *
-     * @param \TK\CoursBundle\Entity\Format $format
-     *
-     * @return Cours
+     * @return integer
      */
-    public function setFormat(\TK\CoursBundle\Entity\Format $format = null)
+    public function getIdCours()
     {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    /**
-     * Get format
-     *
-     * @return \TK\CoursBundle\Entity\Format
-     */
-    public function getFormat()
-    {
-        return $this->format;
+        return $this->idCours;
     }
 
     /**
@@ -307,26 +260,74 @@ class Cours
     }
 
     /**
-     * Set file
+     * Set format
      *
-     * @param string $file
+     * @param \TK\CoursBundle\Entity\Format $format
      *
      * @return Cours
      */
-    public function setFile($file)
+    public function setFormat(\TK\CoursBundle\Entity\Format $format = null)
     {
-        $this->file = $file;
+        $this->format = $format;
 
         return $this;
     }
 
     /**
-     * Get file
+     * Get format
      *
-     * @return string
+     * @return \TK\CoursBundle\Entity\Format
      */
-    public function getFile()
+    public function getFormat()
     {
-        return $this->file;
+        return $this->format;
+    }
+
+    /**
+     * Set acces
+     *
+     * @param \TK\CoursBundle\Entity\Accessibilite $acces
+     *
+     * @return Cours
+     */
+    public function setAcces(\TK\CoursBundle\Entity\Accessibilite $acces = null)
+    {
+        $this->acces = $acces;
+
+        return $this;
+    }
+
+    /**
+     * Get acces
+     *
+     * @return \TK\CoursBundle\Entity\Accessibilite
+     */
+    public function getAcces()
+    {
+        return $this->acces;
+    }
+
+    /**
+     * Set ajoutePar
+     *
+     * @param \TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar
+     *
+     * @return Cours
+     */
+    public function setAjoutePar(\TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar = null)
+    {
+        $this->ajoutePar = $ajoutePar;
+
+        return $this;
+    }
+
+    /**
+     * Get ajoutePar
+     *
+     * @return \TK\UtilisateurBundle\Entity\Utilisateur
+     */
+    public function getAjoutePar()
+    {
+        return $this->ajoutePar;
     }
 }

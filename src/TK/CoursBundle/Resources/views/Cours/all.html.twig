@@ -13,9 +13,8 @@
         {% include "TKCoursBundle:Cours:submenu.html.twig" %}
 
         {% for message in app.session.flashbag.get('notice') %}
-            <div class="alert alert-dismissible alert-success col-sm-12 text-center">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong> {{ message }} </strong>
+            <div class=" text-success text-center ">
+                <strong>{{ message }} <br></strong>.
             </div>
         {% endfor %}
 
@@ -35,11 +34,11 @@
             {% for cours in liste_cours %}
                 <tr>
                     <td>{{ cours.idCours }}</td>
-                    <td>{{ cours.nom }}</td>
-                    <td>{{ cours.prenom }}</td>
-                    <td>{{ cours.sexe.libGenre }}</td>
-                    <td>{{ cours.email }}</td>
-                    <td>{{ cours.role.libGrade }}</td>
+                    <td>{{ cours.titre }}</td>
+                    <td>{{ cours.description }}</td>
+                    <td>{{ cours.format.libFormat }}</td>
+                    <td>{{ cours.acces.libAccessibilite }}</td>
+                    <td>{{ cours.dateAjout | date('d / m / Y') }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_edit', { 'id' : cours.idCours}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_view', { 'id' : cours.idCours}) }}" title="Voir le pdf" class="text-info"><span class="fa fa-eye"></span></a></td>
                     <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{  cours.idCours }}"   title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>

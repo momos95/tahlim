@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c39008b25c0ad123dd3d7a59e2784b85",
+    "content-hash": "13344ce2825a2f9d497699705f1d9c85",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2396,16 +2396,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.3.12",
+            "version": "v3.3.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1452970fc29131776505f684bd81d7a33cbaada4"
+                "reference": "9b0226340705f75fd0cebd220746a36050ead8a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/symfony/1452970fc29131776505f684bd81d7a33cbaada4.zip",
-                "reference": "1452970fc29131776505f684bd81d7a33cbaada4",
+                "url": "https://files.phpcomposer.com/files/symfony/symfony/9b0226340705f75fd0cebd220746a36050ead8a9.zip",
+                "reference": "9b0226340705f75fd0cebd220746a36050ead8a9",
                 "shasum": ""
             },
             "require": {
@@ -2546,7 +2546,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-11-13T19:37:31+00:00"
+            "time": "2017-11-16T18:15:01+00:00"
         },
         {
             "name": "twig/twig",

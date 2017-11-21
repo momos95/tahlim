@@ -89,8 +89,6 @@ class UtilisateurController extends Controller
 
                 $utilisateur->setMdp($mdp) ;
 
-                $em->persist($utilisateur) ;
-
                 $em->flush();
 
                 $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.') ;

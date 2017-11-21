@@ -14,7 +14,7 @@ tk_cours_view:
         id: \d+
 
 tk_cours_edit:
-    path: /view/{id}
+    path: /edit/{id}
     defaults:
         _controller: TKCoursBundle:Cours:edit
     requirements:

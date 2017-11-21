@@ -3,6 +3,11 @@
 namespace TK\CoursBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Request;
+use TK\CoursBundle\Entity\Cours;
+use TK\CoursBundle\Form\CoursEditType;
+use TK\CoursBundle\Form\CoursType;
 
 class CoursController extends Controller
 {
@@ -30,5 +35,86 @@ class CoursController extends Controller
             'pagination'  => $pagination) ;
 
         return $this->render('TKCoursBundle:Cours:all.html.twig',$datas);
+    }
+
+    public function addAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager() ;
+        $cours = new Cours() ;
+        $form = $this->get('form.factory')->create(CoursType::class,$cours) ;
+
+        if($request->isMethod(('POST'))){
+            $form->handleRequest($request) ;
+
+            if($form->isValid()){
+
+                /**
+                 * @var Symfony\Component\HttpFoundation\File\UploadedFile $fichier
+                 */
+                $fichier = $cours->getFile() ;
+
+                $filename = md5(uniqid()). '.' . $fichier->guessExtension() ;
+                $coursDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/cours' ;
+                $fichier->move($coursDir,$filename) ;
+                $cours->setFile($filename) ;
+                $cours->setAjoutePar($this->getUser()) ;
+                $em->persist($cours) ;
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'Cours bien enregistré.') ;
+                return $this->redirectToRoute('tk_cours_homepage') ;
+            }
+        }
+
+        $datas = array(
+            'form'          => $form->createView()
+        );
+
+
+        return $this->render('TKCoursBundle:Cours:add.html.twig',$datas);
+
+    }
+
+    public function editAction(Request $request, $id){
+
+        $em = $this->getDoctrine()->getManager() ;
+        $coursRepository = $em->getRepository('TKCoursBundle:Cours');
+        $cours = $coursRepository->find($id) ;
+        $ancienFile = $cours->getFile() ;
+        $filesystem = new Filesystem() ;
+
+        $form = $this->get('form.factory')->create(CoursEditType::class,$cours) ;
+
+        if($request->isMethod(('POST'))){
+            $form->handleRequest($request) ;
+
+            if($form->isValid()){
+
+                /**
+                 * @var Symfony\Component\HttpFoundation\File\UploadedFile $fichier
+                 */
+                $fichier = $cours->getFile() ;
+
+                if($fichier != null){
+                    $filesystem->remove($this->container->getParameter('kernel.root_dir').'/../web/uploads/cours/'.$ancienFile);
+                    $filename = md5(uniqid()). '.' . $fichier->guessExtension() ;
+                    $coursDir = $this->container->getParameter('kernel.root_dir').'/../web/uploads/cours' ;
+                    $fichier->move($coursDir,$filename) ;
+                    $cours->setFile($filename) ;
+                }
+                else{
+                    $cours->setFile($ancienFile) ;
+                }
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'Cours bien enregistré.') ;
+                return $this->redirectToRoute('tk_cours_homepage') ;
+            }
+        }
+
+        $datas = array(
+            'form'          => $form->createView()
+        );
+
+
+        return $this->render('TKCoursBundle:Cours:edit.html.twig',$datas);
     }
 }
