@@ -40,9 +40,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.role.libGrade }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_utilisateur_view', { 'id' : user.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
-                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{  user.id }}"   title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
-
-                    {% include 'TKUtilisateurBundle:Utilisateur:modal_delete.html.twig' %}
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_utilisateur_delete', { 'id' : user.id}) }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
                 </tr>
             {% else %}
                 <tr><td colspan=7 class="text-center">Pas d'utilisateurs</td></tr>
@@ -50,6 +48,7 @@
 
             </tbody>
         </table>
+
 
 
         {% include 'TKCoreBundle::pagination.html.twig' %}

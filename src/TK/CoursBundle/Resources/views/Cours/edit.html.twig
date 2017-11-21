@@ -114,6 +114,34 @@
 
                     </div>
 
+                    <div class="form-group col-lg-6">
+
+                        {{ form_label(form.ajoutePar,"Ajouté Par : ",{'label_attr' : {'class': 'col-lg-12 control-label'}}) }}
+
+                        <div class="col-lg-12">
+                            {{ form_widget(form.ajoutePar,{'attr':{'class':'form-control','disabled':'disabled'}}) }}
+                        </div>
+
+                        <div class="col-lg-4 text-danger">
+                            {{ form_errors(form.ajoutePar) }}
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-lg-6">
+
+                        {{ form_label(form.dateAjout,"Date d'ajout : ",{'label_attr' : {'class': 'col-lg-12 control-label'}}) }}
+
+                        <div class="col-lg-12">
+                            {{ form_widget(form.dateAjout,{'attr':{'class':'form-control','disabled':'disabled'}}) }}
+                        </div>
+
+                        <div class="col-lg-4 text-danger">
+                            {{ form_errors(form.dateAjout) }}
+                        </div>
+
+                    </div>
+
                     <div class="form-group col-lg-12">
 
                         <p class="text-center">

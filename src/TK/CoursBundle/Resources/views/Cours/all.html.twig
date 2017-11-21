@@ -38,10 +38,10 @@
                     <td>{{ cours.description }}</td>
                     <td>{{ cours.format.libFormat }}</td>
                     <td>{{ cours.acces.libAccessibilite }}</td>
-                    <td>{{ cours.dateAjout | date('d / m / Y') }}</td>
+                    <td>{{ cours.dateAjout | localizeddate('full', 'none') }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_edit', { 'id' : cours.idCours}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
-                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_view', { 'id' : cours.idCours}) }}" title="Voir le pdf" class="text-info"><span class="fa fa-eye"></span></a></td>
-                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{  cours.idCours }}"   title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_view', { 'id' : cours.idCours}) }}" title="Voir le pdf" class="text-primary" ><span class="fa fa-eye"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_delete', { 'id' : cours.idCours}) }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
                 </tr>
             {% else %}
                 <tr><td colspan=7 class="text-center">Pas de cours.</td></tr>

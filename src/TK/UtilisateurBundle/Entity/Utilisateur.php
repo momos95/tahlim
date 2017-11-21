@@ -456,4 +456,7 @@ class Utilisateur implements UserInterface
 
     }
 
+    public function getNomPrenom(){
+        return $this->getNom() . ' ' . $this->getPrenom() ;
+    }
 }

@@ -4,6 +4,7 @@ namespace TK\CoursBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -47,6 +48,20 @@ class CoursEditType extends AbstractType
                 array(
                     'class'         => 'TKCoursBundle:Mois',
                     'choice_label'  => 'libFr'
+                )
+            )
+
+            ->add('ajoutePar',EntityType::class,
+                array(
+                    'class'         => 'TKUtilisateurBundle:Utilisateur',
+                    'choice_label'  => 'nomPrenom',
+                )
+            )
+
+            ->add('dateAjout',DateTimeType::class,
+                array(
+                    'widget'        => 'single_text',
+                    'format'        => 'dd/MM/yyyy'
                 )
             )
 

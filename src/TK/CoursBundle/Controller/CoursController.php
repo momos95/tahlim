@@ -79,12 +79,15 @@ class CoursController extends Controller
         $em = $this->getDoctrine()->getManager() ;
         $coursRepository = $em->getRepository('TKCoursBundle:Cours');
         $cours = $coursRepository->find($id) ;
+        $ajouterPar = $cours->getAjoutePar();
+        $dateAjout = $cours->getDateAjout();
         $ancienFile = $cours->getFile() ;
         $filesystem = new Filesystem() ;
 
         $form = $this->get('form.factory')->create(CoursEditType::class,$cours) ;
 
         if($request->isMethod(('POST'))){
+
             $form->handleRequest($request) ;
 
             if($form->isValid()){
@@ -104,6 +107,8 @@ class CoursController extends Controller
                 else{
                     $cours->setFile($ancienFile) ;
                 }
+                $cours->setAjoutePar($ajouterPar);
+                $cours->setDateAjout($dateAjout) ;
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('notice', 'Cours bien enregistré.') ;
                 return $this->redirectToRoute('tk_cours_homepage') ;
@@ -116,5 +121,31 @@ class CoursController extends Controller
 
 
         return $this->render('TKCoursBundle:Cours:edit.html.twig',$datas);
+    }
+
+    public function viewAction($id){
+        $em = $this->getDoctrine()->getManager() ;
+        $coursRepository = $em->getRepository('TKCoursBundle:Cours');
+        $cours = $coursRepository->find($id) ;
+        $datas = array(
+            'cours'     => $cours,
+            'url'       => 'uploads/cours/'.$cours->getFile()
+        );
+        return $this->render('TKCoursBundle:Cours:view.html.twig',$datas);
+    }
+
+    public function deleteAction(Request $request, $id){
+
+        $em = $this->getDoctrine()->getManager() ;
+        $coursRepository = $em->getRepository('TKCoursBundle:Cours');
+        $cours = $coursRepository->find($id) ;
+        $filesystem = new Filesystem() ;
+        $filesystem->remove($this->container->getParameter('kernel.root_dir').'/../web/uploads/cours/'.$cours->getFile());
+        $em->remove($cours);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Cours bien supprimé.') ;
+        return $this->redirectToRoute('tk_cours_homepage') ;
+
+
     }
 }
