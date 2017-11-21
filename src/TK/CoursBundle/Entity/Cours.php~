@@ -3,7 +3,7 @@
 namespace TK\CoursBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * Cours
  *
@@ -67,6 +67,14 @@ class Cours
     private $acces;
 
     /**
+     *
+     * @ORM\Column(name="file", type="string", length=10, nullable=true)
+     * @Assert\NotBlank(message="Veuillez inclure le fichier de cours s'il vous plaît.")
+     * @Assert\File(mimeTypes={"application/pdf"})
+     */
+    private $file;
+
+    /**
      * @var \Format
      *
      * @ORM\ManyToOne(targetEntity="Format")
@@ -74,7 +82,10 @@ class Cours
      *   @ORM\JoinColumn(name="format", referencedColumnName="id_format")
      * })
      */
+
+
     private $format;
+
 
     /**
      * @var \Mois
@@ -92,5 +103,206 @@ class Cours
         $this->dateAjout = new \DateTime() ;
     }
 
-}
 
+    /**
+     * Get idCours
+     *
+     * @return integer
+     */
+    public function getIdCours()
+    {
+        return $this->idCours;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Cours
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Cours
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set annee
+     *
+     * @param string $annee
+     *
+     * @return Cours
+     */
+    public function setAnnee($annee)
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    /**
+     * Get annee
+     *
+     * @return string
+     */
+    public function getAnnee()
+    {
+        return $this->annee;
+    }
+
+    /**
+     * Set ajoutePar
+     *
+     * @param integer $ajoutePar
+     *
+     * @return Cours
+     */
+    public function setAjoutePar($ajoutePar)
+    {
+        $this->ajoutePar = $ajoutePar;
+
+        return $this;
+    }
+
+    /**
+     * Get ajoutePar
+     *
+     * @return integer
+     */
+    public function getAjoutePar()
+    {
+        return $this->ajoutePar;
+    }
+
+    /**
+     * Set dateAjout
+     *
+     * @param \DateTime $dateAjout
+     *
+     * @return Cours
+     */
+    public function setDateAjout($dateAjout)
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAjout
+     *
+     * @return \DateTime
+     */
+    public function getDateAjout()
+    {
+        return $this->dateAjout;
+    }
+
+    /**
+     * Set acces
+     *
+     * @param \TK\CoursBundle\Entity\Accessibilite $acces
+     *
+     * @return Cours
+     */
+    public function setAcces(\TK\CoursBundle\Entity\Accessibilite $acces = null)
+    {
+        $this->acces = $acces;
+
+        return $this;
+    }
+
+    /**
+     * Get acces
+     *
+     * @return \TK\CoursBundle\Entity\Accessibilite
+     */
+    public function getAcces()
+    {
+        return $this->acces;
+    }
+
+    /**
+     * Set format
+     *
+     * @param \TK\CoursBundle\Entity\Format $format
+     *
+     * @return Cours
+     */
+    public function setFormat(\TK\CoursBundle\Entity\Format $format = null)
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * Get format
+     *
+     * @return \TK\CoursBundle\Entity\Format
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * Set mois
+     *
+     * @param \TK\CoursBundle\Entity\Mois $mois
+     *
+     * @return Cours
+     */
+    public function setMois(\TK\CoursBundle\Entity\Mois $mois = null)
+    {
+        $this->mois = $mois;
+
+        return $this;
+    }
+
+    /**
+     * Get mois
+     *
+     * @return \TK\CoursBundle\Entity\Mois
+     */
+    public function getMois()
+    {
+        return $this->mois;
+    }
+}

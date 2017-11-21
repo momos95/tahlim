@@ -19,9 +19,6 @@ class UtilisateurController extends Controller
     public function allAction($page)
     {
 
-        if ($page <= 0)
-            $this->redirectToRoute('tk_utilisateur_homepage',array('page' =>1)) ;
-
         $maxArticles = $this->container->getParameter('max_item_per_page') ;
 
         $em = $this->getDoctrine()->getManager() ;

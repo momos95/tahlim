@@ -37,7 +37,7 @@
                             <a class="nav-link" href="#">Etudiants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Cours</a>
+                            <a class="nav-link" href="{{ path('tk_cours_homepage') }}">Cours</a>
                         </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMINISTRATEUR') %}
@@ -52,7 +52,7 @@
                             <a href="" class="nav-link" title="Aide"><i class="fa fa-info"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link" title="Profil"><i class="fa fa-user"></i></a>
+                            <a href="{{ path('tk_profile_edit') }}" class="nav-link" title="Profil"><i class="fa fa-user"></i></a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ path('logout') }}" class="nav-link" title="Se déconnecter"><i class="fa fa-sign-out"></i></a>

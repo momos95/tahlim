@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header modal-header-danger">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="text-danger"><i class="glyphicon glyphicon-remove"></i>Suppression</h4>
+                <h4 class="text-danger"><i class="fa fa-remove fa-2x"></i>Suppression</h4>
             </div>
             <div class="modal-body">
                 <p>Voulez-vous vraiment supprimer l'utilisateur {{ user.prenom }} {{  user.nom }} </p>
@@ -11,6 +11,26 @@
             <div class="modal-footer">
                 <a type="button" href="{{ path('tk_utilisateur_delete', { 'id' : user.id }) }}" class="btn btn-danger">Supprimer</a>
                 <a href="#" data-dismiss="modal" aria-hidden="true" class="btn btn-primary">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

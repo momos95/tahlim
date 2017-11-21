@@ -3,7 +3,7 @@
 namespace TK\CoursBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert ;
 /**
  * Cours
  *
@@ -67,6 +67,14 @@ class Cours
     private $acces;
 
     /**
+     *
+     * @ORM\Column(name="file", type="string", length=10, nullable=true)
+     * @Assert\NotBlank(message="Veuillez inclure le fichier de cours s'il vous plaît.")
+     * @Assert\File(mimeTypes={"application/pdf"})
+     */
+    private $file;
+
+    /**
      * @var \Format
      *
      * @ORM\ManyToOne(targetEntity="Format")
@@ -74,7 +82,10 @@ class Cours
      *   @ORM\JoinColumn(name="format", referencedColumnName="id_format")
      * })
      */
+
+
     private $format;
+
 
     /**
      * @var \Mois
@@ -293,5 +304,29 @@ class Cours
     public function getMois()
     {
         return $this->mois;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     *
+     * @return Cours
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

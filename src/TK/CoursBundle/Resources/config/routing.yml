@@ -1,3 +1,28 @@
 tk_cours_homepage:
-    path:     /
-    defaults: { _controller: TKCoursBundle:Default:index }
+    path:     /liste/{page}
+    defaults: { _controller: TKCoursBundle:Cours:all, page: 1 }
+
+tk_cours_add:
+    path: /add
+    defaults: { _controller: TKCoursBundle:Cours:add }
+
+tk_cours_view:
+    path: /view/{id}
+    defaults:
+        _controller: TKCoursBundle:Cours:view
+    requirements:
+        id: \d+
+
+tk_cours_edit:
+    path: /view/{id}
+    defaults:
+        _controller: TKCoursBundle:Cours:edit
+    requirements:
+        id: \d+
+
+tk_cours_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: TKCoursBundle:Cours:delete
+    requirements:
+        id: \d+

@@ -19,3 +19,7 @@ tk_utilisateur_delete:
         _controller: TKUtilisateurBundle:Utilisateur:delete
     requirements:
         id: \d+
+
+tk_profile_edit:
+    path: /profile
+    defaults: { _controller: TKUtilisateurBundle:Profil:edit }
