@@ -1,16 +1,19 @@
 {% extends "TKCoreBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - Utilisateurs
+    {{ parent() }} - Etudiants
 {% endblock %}
 
 {% block body %}
 
 
-    <div class="container-fluid" style="background: #e3e3e3; margin-top: 0px; padding-top: 0">
+    <div class="container-fluid" style="background: #e3e3e3; margin-top: 0px">
 
 
-        {% include "TKUtilisateurBundle:Utilisateur:submenu.html.twig" %}
+        {% include "TKUtilisateurBundle:Etudiant:submenu.html.twig" %}
+
+        {% include "TKUtilisateurBundle:Etudiant:searchmenu.html.twig" %}
+
 
         {% for message in app.session.flashbag.get('notice') %}
             <div class=" text-success text-center ">
@@ -26,7 +29,7 @@
                 <th>Prénom</th>
                 <th>Genre</th>
                 <th>Email</th>
-                <th>Rôle</th>
+                <th>Abonnement</th>
                 <th class="text-center" colspan="2">Actions</th>
             </tr>
             </thead>
@@ -38,12 +41,12 @@
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.sexe.libGenre }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.role.libGrade }}</td>
-                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_utilisateur_view', { 'id' : user.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
-                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_utilisateur_delete', { 'id' : user.id}) }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
+                    <td>{{ user.abonnementEtat.libEtatFr }}</td>
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_etudiant_view', { 'id' : user.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_etudiant_delete', { 'id' : user.id}) }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
                 </tr>
             {% else %}
-                <tr><td colspan=7 class="text-center">Pas d'utilisateurs</td></tr>
+                <tr><td colspan=7 class="text-center">Pas d'étudiants</td></tr>
             {% endfor %}
 
             </tbody>

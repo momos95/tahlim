@@ -23,4 +23,17 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 
         return new Paginator($q);
     }
+
+    public function getListEtudiant($page=1, $maxperpage=20)
+    {
+        $q = $this->_em->createQueryBuilder()
+            ->select('utilisateur')
+            ->from('TKUtilisateurBundle:Utilisateur','utilisateur')
+            ->where('utilisateur.role = 3') ;
+
+        $q->setFirstResult(($page-1) * $maxperpage)
+            ->setMaxResults($maxperpage);
+
+        return new Paginator($q);
+    }
 }

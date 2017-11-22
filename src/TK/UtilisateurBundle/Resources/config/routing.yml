@@ -1,24 +1,47 @@
 tk_utilisateur_homepage:
-    path:     /liste/{page}
+    path:     /utilisateurs/liste/{page}
     defaults: { _controller: TKUtilisateurBundle:Utilisateur:all, page: 1 }
 
 tk_utilisateur_add:
-    path:     /add
+    path:     /utilisateurs/add
     defaults: { _controller: TKUtilisateurBundle:Utilisateur:add}
 
 tk_utilisateur_view:
-    path:    /view/{id}
+    path:    /utilisateurs/view/{id}
     defaults:
         _controller: TKUtilisateurBundle:Utilisateur:view
     requirements:
         id: \d+
 
 tk_utilisateur_delete:
-    path:    /delete/{id}
+    path:    /utilisateurs/delete/{id}
     defaults:
         _controller: TKUtilisateurBundle:Utilisateur:delete
     requirements:
         id: \d+
+
+tk_etudiant_homepage:
+    path:     /etudiants/liste/{page}
+    defaults: { _controller: TKUtilisateurBundle:Etudiant:all, page: 1 }
+
+tk_etudiant_add:
+    path:     /etudiants/add
+    defaults: { _controller: TKUtilisateurBundle:Etudiant:add}
+
+tk_etudiant_view:
+    path:    /etudiants/view/{id}
+    defaults:
+        _controller: TKUtilisateurBundle:Etudiant:view
+    requirements:
+        id: \d+
+
+tk_etudiant_delete:
+    path:    /etudiants/delete/{id}
+    defaults:
+        _controller: TKUtilisateurBundle:Etudiant:delete
+    requirements:
+        id: \d+
+
 
 tk_profile_edit:
     path: /profile

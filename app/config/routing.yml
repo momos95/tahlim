@@ -8,7 +8,7 @@ tk_cours:
 
 tk_utilisateur:
     resource: "@TKUtilisateurBundle/Resources/config/routing.yml"
-    prefix:   /utilisateurs
+    prefix:   /
 
 tk_core:
     resource: "@TKCoreBundle/Resources/config/routing.yml"

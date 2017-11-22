@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="grade_in_assos_idx", columns={"role"}), @ORM\Index(name="etat_abon_in_assos_idx", columns={"abonnement_etat"}), @ORM\Index(name="genre_in_assos_idx", columns={"sexe"}), @ORM\Index(name="pays_in_assos_idx", columns={"pays"})})
  * @ORM\Entity(repositoryClass="TK\UtilisateurBundle\Repository\UtilisateurRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Utilisateur implements UserInterface
 {
@@ -458,5 +459,14 @@ class Utilisateur implements UserInterface
 
     public function getNomPrenom(){
         return $this->getNom() . ' ' . $this->getPrenom() ;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setPrettyFirstLastName()
+    {
+        $this->nom = strtoupper($this->nom) ;
+        $this->prenom = ucfirst(strtolower($this->prenom));
     }
 }

@@ -26,3 +26,4 @@ tk_cours_delete:
         _controller: TKCoursBundle:Cours:delete
     requirements:
         id: \d+
+
