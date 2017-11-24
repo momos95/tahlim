@@ -16,9 +16,7 @@
 
 
         {% for message in app.session.flashbag.get('notice') %}
-            <div class=" text-success text-center ">
-                <strong>{{ message }} <br></strong>.
-            </div>
+            {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
         <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
@@ -43,8 +41,9 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.abonnementEtat.libEtatFr }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_etudiant_view', { 'id' : user.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
-                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_etudiant_delete', { 'id' : user.id}) }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{ user.id }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
                 </tr>
+                {% include "TKUtilisateurBundle:Etudiant:modal_delete.html.twig" %}
             {% else %}
                 <tr><td colspan=7 class="text-center">Pas d'étudiants</td></tr>
             {% endfor %}

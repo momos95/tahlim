@@ -16,6 +16,8 @@ use TK\UtilisateurBundle\Form\UtilisateurType;
 
 class EtudiantController extends Controller
 {
+    public $etudiantsActive = "active" ;
+
     public function allAction($page)
     {
 
@@ -37,6 +39,7 @@ class EtudiantController extends Controller
 
         $datas = array(
             'liste_users' => $etudiantsRepository->getListEtudiant($page,$maxArticles),
+            'etudiant'     => $this->etudiantsActive ,
             'pagination'  => $pagination) ;
 
         return $this->render('TKUtilisateurBundle:Etudiant:all.html.twig',$datas);
@@ -61,7 +64,8 @@ class EtudiantController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'etudiant'     => $this->etudiantsActive
         );
 
 
@@ -98,7 +102,8 @@ class EtudiantController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'etudiant'     => $this->etudiantsActive
         );
 
 

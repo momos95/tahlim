@@ -1,22 +1,22 @@
-<div id="supModal{{ user.id }}" class="modal fade" role="dialog">
+<div id="supModal{{ cours.idCours }}" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Supprimer un utilisateur</h5>
+                <h3 class="modal-title text-danger">Supprimer un cours</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <p class="text-center text-danger">
-                    Vous êtes sur le point de supprimer l'utilisateur <b class="text-primary">"{{ user.nomPrenom }}"</b>.<br>
+                    Vous êtes sur le point de supprimer le cours <b class="text-primary">"{{ cours.titre }}"</b>.<br>
                     Voulez-vous vraiment continuer ?
                 </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-danger" href="{{ path('tk_utilisateur_delete',{ 'id' : user.id }) }}">OUI</a>
+                <a class="btn btn-danger" href="{{ path('tk_cours_delete',{ 'id' : cours.idCours }) }}">OUI</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">NON</button>
             </div>
         </div>

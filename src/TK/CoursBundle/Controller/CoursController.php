@@ -32,6 +32,7 @@ class CoursController extends Controller
 
         $datas = array(
             'liste_cours' => $coursRepository->getList($page,$maxArticles),
+            'cours'     => 'active',
             'pagination'  => $pagination) ;
 
         return $this->render('TKCoursBundle:Cours:all.html.twig',$datas);
@@ -66,7 +67,8 @@ class CoursController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'cours'     => 'active'
         );
 
 
@@ -116,7 +118,8 @@ class CoursController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'cours'     => 'active'
         );
 
 
@@ -128,8 +131,9 @@ class CoursController extends Controller
         $coursRepository = $em->getRepository('TKCoursBundle:Cours');
         $cours = $coursRepository->find($id) ;
         $datas = array(
-            'cours'     => $cours,
-            'url'       => 'uploads/cours/'.$cours->getFile()
+            'course'     => $cours,
+            'url'       => 'uploads/cours/'.$cours->getFile(),
+            'cours'     => 'active'
         );
         return $this->render('TKCoursBundle:Cours:view.html.twig',$datas);
     }
@@ -145,7 +149,6 @@ class CoursController extends Controller
         $em->flush();
         $request->getSession()->getFlashBag()->add('notice', 'Cours bien supprimé.') ;
         return $this->redirectToRoute('tk_cours_homepage') ;
-
 
     }
 }

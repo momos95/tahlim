@@ -1,30 +1,42 @@
 <div class="card" style="position: relative; display: inline-block; width: 100%; margin-top: 5px; margin-bottom: 10px">
     <div class="card-header">
-        <!--<a data-toggle="collapse" href="#test-block" aria-expanded="true" aria-controls="test-block">-->
+        <a data-toggle="collapse" href="#test-block" aria-expanded="true" aria-controls="test-block">
             Rechercher avec ou sans Filtre(s).
-        <!--</a>-->
+        </a>
     </div>
 
-    <div class="card-body">
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="inputNom">Nom</label>
-                <input type="text" id="inputNom" class="form-control mx-sm-3" >
-            </div>
-            <div class="form-group">
-                <label for="inputPrenom">Prénom</label>
-                <input type="text" id="inputPrenom" class="form-control mx-sm-3">
-            </div>
-            <div class="form-group">
-                <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-        </form>
+
+    <div id="test-block" class="collapse">
+        <div class="card-body">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="inputNom">Nom</label>
+                    <input type="text" id="inputNom" class="form-control mx-sm-3" >
+                </div>
+                <div class="form-group">
+                    <label for="inputPrenom">Prénom</label>
+                    <input type="text" id="inputPrenom" class="form-control mx-sm-3">
+                </div>
+                <div class="form-group">
+                    <label for="inlineFormCustomSelect">Sexe</label>
+                    <select class="custom-select mx-sm-3" id="inlineFormCustomSelect">
+                        <option value="2">Homme</option>
+                        <option value="3">Femme</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inlineFormCustomSelect">Abonnement</label>
+                    <select class="custom-select mx-sm-3" id="inlineFormCustomSelect">
+                        <option value="2">En cours</option>
+                        <option value="3">Expiré</option>
+                        <option value="3">Rompu</option>
+                        <option value="3">Découverte</option>
+                    </select>
+                </div>
+            </form>
+        </div>
     </div>
+
+
 
 </div>

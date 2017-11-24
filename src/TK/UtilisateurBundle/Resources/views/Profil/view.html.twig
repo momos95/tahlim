@@ -10,10 +10,7 @@
     <div class="container-fluid" style="background: #e3e3e3; margin-top: 0px">
 
         {% for message in app.session.flashbag.get('notice') %}
-            <div class=" text-success text-center ">
-                <br>
-                <strong>{{ message }} <br></strong>.
-            </div>
+            {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
         <div style="position: relative; display: inline-block;border:1px solid #CCC;background: #FFF;color:#666; width: 100% ; padding-top: 10px">

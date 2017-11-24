@@ -54,7 +54,8 @@ class ProfilController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'profil'        => 'active'
         );
 
 

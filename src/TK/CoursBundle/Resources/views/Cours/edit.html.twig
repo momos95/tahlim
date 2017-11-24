@@ -13,9 +13,7 @@
         {% include "TKCoursBundle:Cours:submenu.html.twig" %}
 
         {% for message in app.session.flashbag.get('notice') %}
-            <div class=" text-success text-center ">
-                <strong>{{ message }} <br></strong>.
-            </div>
+            {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
 

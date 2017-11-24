@@ -37,6 +37,7 @@ class UtilisateurController extends Controller
 
         $datas = array(
             'liste_users' => $utilisateursRepository->getList($page,$maxArticles),
+            'utilisateur'     => 'active',
             'pagination'  => $pagination) ;
 
         return $this->render('TKUtilisateurBundle:Utilisateur:all.html.twig',$datas);
@@ -61,7 +62,8 @@ class UtilisateurController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'utilisateur'     => 'active'
         );
 
 
@@ -98,7 +100,8 @@ class UtilisateurController extends Controller
         }
 
         $datas = array(
-            'form'          => $form->createView()
+            'form'          => $form->createView(),
+            'utilisateur'     => 'active'
         );
 
 

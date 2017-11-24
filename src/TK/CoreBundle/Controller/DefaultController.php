@@ -8,6 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TKCoreBundle:Default:index.html.twig');
+        $data = array('accueil' => 'active') ;
+        return $this->render('TKCoreBundle:Default:index.html.twig', $data);
     }
 }

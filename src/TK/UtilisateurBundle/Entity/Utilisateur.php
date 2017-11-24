@@ -5,6 +5,8 @@ namespace TK\UtilisateurBundle\Entity ;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * Utilisateur
@@ -12,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="grade_in_assos_idx", columns={"role"}), @ORM\Index(name="etat_abon_in_assos_idx", columns={"abonnement_etat"}), @ORM\Index(name="genre_in_assos_idx", columns={"sexe"}), @ORM\Index(name="pays_in_assos_idx", columns={"pays"})})
  * @ORM\Entity(repositoryClass="TK\UtilisateurBundle\Repository\UtilisateurRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"email"}, message="Cette adresse mail correspond déjà à un compte existant.")
  */
 class Utilisateur implements UserInterface
 {
