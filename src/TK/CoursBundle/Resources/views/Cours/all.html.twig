@@ -22,7 +22,7 @@
                 <th>#</th>
                 <th>Titre</th>
                 <th>Description</th>
-                <th>Format</th>
+                <th>Ajouté Par</th>
                 <th>Accessibilité</th>
                 <th>Date Ajout</th>
                 <th class="text-center" colspan="3">Actions</th>
@@ -34,7 +34,7 @@
                     <td>{{ cours.idCours }}</td>
                     <td>{{ cours.titre }}</td>
                     <td>{{ cours.description }}</td>
-                    <td>{{ cours.format.libFormat }}</td>
+                    <td>{{ cours.ajoutePar.nomPrenom }}</td>
                     <td>{{ cours.acces.libAccessibilite }}</td>
                     <td>{{ cours.dateAjout | localizeddate('full', 'none') }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_edit', { 'id' : cours.idCours}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>

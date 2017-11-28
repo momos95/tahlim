@@ -15,19 +15,26 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
-class ProfilType extends AbstractType
+class SearchType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
 
 
-            ->add('nom', TextType::class)
+            ->add('nom', TextType::class,array(
+                'required'      => false
+            ))
 
-            ->add('prenom', TextType::class)
+
+            ->add('prenom', TextType::class,array(
+                'required'      => false
+            ))
+
 
             ->add('sexe', EntityType::class,
                 array(
@@ -35,33 +42,29 @@ class ProfilType extends AbstractType
                     'choice_label' => 'libGenre'
                 )
             )
-            ->add('dateNaissance', DateTimeType::class,
-                array(
-                    'widget'        => 'single_text',
-                    'format'        => 'dd/MM/yyyy'
-                ))
 
             ->add('email',EmailType::class, array(
-                    'constraints' =>[
-                        new NotBlank([
-                            'message' => 'This field can not be blank'
-                        ])
-                    ],
+                    'required'  => false
                 )
             )
 
-            ->add('mdp',PasswordType::class,array(
-                'required'      => false,
-            ))
+            ->add('abonnementEtat',EntityType::class,
+                array(
+                    'class'         => 'TKAbonnementBundle:EtatAbonnement',
+                    'choice_label'  => 'libEtatFr'
+                )
+            )
+
 
             ->add('pays', EntityType::class,
                 array(
                     'class'         => 'TKUtilisateurBundle:Pays',
-                    'choice_label'  => 'libFr'
+                    'choice_label'  => 'libFr',
+                    'data'          => ''
                 ))
 
 
-            ->add('Enregister',      SubmitType::class) ;
+            ->add('Filtrer',      SubmitType::class) ;
     }
     
     /**
@@ -70,7 +73,7 @@ class ProfilType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TK\UtilisateurBundle\Entity\Utilisateur'
+            'data_class' => 'TK\UtilisateurBundle\Entity\Search'
         ));
     }
 
@@ -79,7 +82,7 @@ class ProfilType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'tk_utilisateurbundle_profil';
+        return 'tk_utilisateurbundle_search';
     }
 
 

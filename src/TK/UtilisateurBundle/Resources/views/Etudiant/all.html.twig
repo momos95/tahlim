@@ -53,8 +53,9 @@
 
 
 
-        {% include 'TKCoreBundle::pagination.html.twig' %}
-
+        {% if pagination %}
+            {% include 'TKCoreBundle::pagination.html.twig' %}
+        {% endif %}
     </div>
 
 

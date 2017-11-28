@@ -1,5 +1,5 @@
-<p class="text-center">
-    <ul class="pagination text-center">
+<p class="text-md-center">
+    <ul class="pagination text-md-center">
         {% if pagination.page >= 1 %}
             <li {% if pagination.page == 1 %} class="page-item disabled" {% else %} class="page-item" {% endif %}><a class="page-link" href="{{ path(pagination.route,pagination.route_params|merge({'page': 1})) }}"><<</a></li>
             <li {% if pagination.page == 1 %} class="page-item disabled" {% else %} class="page-item" {% endif %}><a class="page-link" href="{{ path(pagination.route,pagination.route_params|merge({'page': pagination.page-1})) }}">Précédent</a></li>
@@ -20,5 +20,5 @@
             <li {% if pagination.page == pagination.pages_count %} class="page-item disabled" {% else %} class="page-item" {% endif %}><a class="page-link" href="{{ path(pagination.route,pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a></li>
         {% endif %}
     </ul>
-
+<br>
 </p>

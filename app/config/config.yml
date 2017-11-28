@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: fr
     nom_application: SUNNAH
+    version: 1.2
 
 framework:
     #esi: ~
@@ -41,6 +42,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         nom_site: '%nom_application%'
+        version_site: '%version%'
 
 # Doctrine Configuration
 doctrine:

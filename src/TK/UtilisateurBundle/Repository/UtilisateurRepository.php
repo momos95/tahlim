@@ -2,6 +2,8 @@
 
 namespace TK\UtilisateurBundle\Repository;
 use Doctrine\ORM\Tools\Pagination\Paginator ;
+use TK\UtilisateurBundle\Entity\Search;
+use TK\UtilisateurBundle\Entity\Utilisateur;
 
 /**
  * UtilisateurRepository
@@ -36,4 +38,64 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 
         return new Paginator($q);
     }
+
+    public function getListEtudiantFiltre(Search $etudiant)
+    {
+
+        $where = "" ;
+
+        if(!empty($etudiant->getNom())){
+            $where = empty($where) ? ' utilisateur.nom LIKE :nom ' : $where . ' or utilisateur.nom LIKE :nom ';
+        }
+
+        if(!empty($etudiant->getPrenom())){
+            $where = empty($where) ? ' utilisateur.prenom LIKE :prenom ' : $where . ' or utilisateur.prenom LIKE :prenom ';
+        }
+
+        if(!empty($etudiant->getEmail())){
+            $where = empty($where) ? ' utilisateur.email LIKE :email ' : $where . ' or utilisateur.email LIKE :email ' ;
+        }
+
+        $q = $this->_em->createQueryBuilder()
+            ->select('utilisateur')
+            ->from('TKUtilisateurBundle:Utilisateur','utilisateur') ;
+
+
+        if(!empty($where)){
+            $q->where($where) ;
+        }
+
+        $q->andWhere('utilisateur.role = 3 ') ;
+
+        if($etudiant->getSexe()->getIdGenre() != 0){
+            $q->andWhere('utilisateur.sexe = '. $etudiant->getSexe()->getIdGenre()) ;
+        }
+
+        if($etudiant->getAbonnementEtat()->getIdEtat() != 0){
+            $q->andWhere('utilisateur.abonnementEtat = '. $etudiant->getAbonnementEtat()->getIdEtat()) ;
+        }
+
+        if($etudiant->getPays()->getIdPays() != 0){
+            $q->andWhere('utilisateur.pays = '. $etudiant->getPays()->getIdPays());
+        }
+
+        if(!empty($etudiant->getNom())){
+            $q->setParameter('nom','%' . $etudiant->getNom() . '%') ;
+        }
+
+        if(!empty($etudiant->getPrenom())){
+           $q->setParameter('prenom','%' . $etudiant->getPrenom() . '%');
+        }
+
+        if(!empty($etudiant->getEmail())){
+            $q->setParameter('email','%' . $etudiant->getEmail() . '%');
+        }
+
+
+
+       return $q->getQuery()->execute() ;
+    }
+
+
+
 }

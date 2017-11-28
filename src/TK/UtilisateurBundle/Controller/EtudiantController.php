@@ -11,14 +11,17 @@ namespace TK\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request ;
 use Symfony\Component\HttpFoundation\Response ;
+use TK\UtilisateurBundle\Entity\Genre;
+use TK\UtilisateurBundle\Entity\Search;
 use TK\UtilisateurBundle\Entity\Utilisateur;
+use TK\UtilisateurBundle\Form\SearchType;
 use TK\UtilisateurBundle\Form\UtilisateurType;
 
 class EtudiantController extends Controller
 {
     public $etudiantsActive = "active" ;
 
-    public function allAction($page)
+    public function allAction(Request $request, $page)
     {
 
         $maxArticles = $this->container->getParameter('max_item_per_page') ;
@@ -29,6 +32,12 @@ class EtudiantController extends Controller
 
         $articles_count = count($etudiantsRepository->findAll());
 
+        $etudiant = new Search();
+
+        $form = $this->get('form.factory')->create(SearchType::class,$etudiant) ;
+
+        $liste_users = $etudiantsRepository->getListEtudiant($page,$maxArticles) ;
+
         $pagination = array(
             'page' => $page,
             'route' => 'tk_etudiant_homepage',
@@ -37,10 +46,21 @@ class EtudiantController extends Controller
         );
 
 
+        if($request->isMethod(('POST'))){
+
+            $form->handleRequest($request) ;
+
+            if($form->isValid()){
+                $pagination = null ;
+                $liste_users = $etudiantsRepository->getListEtudiantFiltre($etudiant) ;
+            }
+        }
+
         $datas = array(
-            'liste_users' => $etudiantsRepository->getListEtudiant($page,$maxArticles),
-            'etudiant'     => $this->etudiantsActive ,
-            'pagination'  => $pagination) ;
+            'liste_users'   => $liste_users,
+            'etudiant'      => $this->etudiantsActive ,
+            'pagination'    => $pagination,
+            'form'          => $form->createView()) ;
 
         return $this->render('TKUtilisateurBundle:Etudiant:all.html.twig',$datas);
     }

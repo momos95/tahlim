@@ -9,7 +9,7 @@
         <div class="jumbotron">
             <h1 class="display-3">SUNNAH</h1>
             <p>Ici vous pourrez gérer l'ensemble des entités de l'application mobile SUNNAH et d'en assurer le suivi.</p>
-            <p><a class="btn btn-primary btn-lg" href="#">Lire la documentation...</a></p>
+            <p><a class="btn btn-info btn-lg" href="">Lire la documentation...</a></p>
         </div>
 
 
@@ -18,22 +18,22 @@
             {% if is_granted('ROLE_ADMINISTRATEUR') %}
                 <div class="col-md-4 col-xs-6" >
                     <div class="thumbnail">
-                        <a href="" >
+                        <a href="{{ path('tk_cours_homepage') }}" >
                             <img src="{{ asset('bundles/tkcore/images/livres.jpg') }}"  alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
-                            <h4 class="text-center"><a href="" class="text-success">Gestion des Cours</a></h4>
+                            <h4 class="text-center"><a href="{{ path('tk_cours_homepage') }}" class="text-success">Gestion des Cours</a></h4>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-xs-6">
                     <div class="thumbnail">
-                        <a href="" >
+                        <a href="{{ path('tk_etudiant_homepage') }}">
                             <img src="{{ asset('bundles/tkcore/images/classes.jpg') }}" height="367px" alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
-                            <h4 class="text-center"><a href="" class="text-warning">Gestion des Etudiants</a></h4>
+                            <h4 class="text-center"><a href="{{ path('tk_etudiant_homepage') }}" class="text-warning">Gestion des Etudiants</a></h4>
                         </div>
                     </div>
                 </div>
@@ -51,22 +51,22 @@
             {% else %}
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <a href="" >
+                        <a href="{{ path('tk_cours_homepage') }}" >
                             <img src="{{ asset('bundles/tkcore/images/livres.jpg') }}" alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
-                            <h4 class="text-center"><a href="" class="text-success">Gestion des Cours</a></h4>
+                            <h4 class="text-center"><a href="{{ path('tk_cours_homepage') }}" class="text-success">Gestion des Cours</a></h4>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="thumbnail">
-                        <a href="" >
+                        <a href="{{ path('tk_etudiant_homepage') }} >
                             <img src="{{ asset('bundles/tkcore/images/classes.jpg') }}" alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
-                            <h4 class="text-center"><a href="" class="text-warning">Gestion des Etudiants</a></h4>
+                            <h4 class="text-center"><a href="{{ path('tk_etudiant_homepage') }}" class="text-warning">Gestion des Etudiants</a></h4>
                         </div>
                     </div>
                 </div>

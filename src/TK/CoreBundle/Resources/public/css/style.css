@@ -71,3 +71,8 @@ th{
 }
 
 .center-block{display:block;margin-left:auto;margin-right:auto}.pull-right{float:right !important}
+
+.navbar-brand img {
+    height: 50px;
+    width: 50px;
+}
