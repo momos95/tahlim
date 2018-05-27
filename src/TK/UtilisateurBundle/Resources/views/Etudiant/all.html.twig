@@ -19,6 +19,10 @@
             {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
+        {% for message in app.session.flashbag.get('warning') %}
+            {% include "TKCoreBundle::modal_ko.html.twig" %}
+        {% endfor %}
+
         <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
             <thead>
             <tr style="color: black;">
@@ -28,22 +32,24 @@
                 <th>Genre</th>
                 <th>Email</th>
                 <th>Abonnement</th>
-                <th class="text-center" colspan="2">Actions</th>
+                <th class="text-center" colspan="3">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for user in liste_users %}
                 <tr>
-                    <td>{{ user.id }}</td>
+                    <td><span class="fa fa-user"></span></td>
                     <td>{{ user.nom }}</td>
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.sexe.libGenre }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.abonnementEtat.libEtatFr }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_etudiant_view', { 'id' : user.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#listeAbonnementsModal{{ user.id }}" title="Liste des abonnements" class="text-info"><span class="fa fa-euro"></span></a></td>
                     <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{ user.id }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
                 </tr>
                 {% include "TKUtilisateurBundle:Etudiant:modal_delete.html.twig" %}
+
             {% else %}
                 <tr><td colspan=7 class="text-center">Pas d'étudiants</td></tr>
             {% endfor %}
@@ -51,6 +57,9 @@
             </tbody>
         </table>
 
+        {% for user in liste_users %}
+            {% include "TKUtilisateurBundle:Etudiant:modal_liste_abonnements.html.twig" %}
+        {% endfor %}
 
 
         {% if pagination %}

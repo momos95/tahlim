@@ -1,5 +1,6 @@
 <?php
 
+
 namespace TK\AbonnementBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Abonnement
  *
- * @ORM\Table(name="abonnement", indexes={@ORM\Index(name="etat_in_assos_idx", columns={"etat"})})
+ * @ORM\Table(name="abonnement", indexes={@ORM\Index(name="etat_in_assos_idx", columns={"etat"}), @ORM\Index(name="type", columns={"type"})})
  * @ORM\Entity(repositoryClass="TK\AbonnementBundle\Repository\AbonnementRepository")
- */
+ * */
 class Abonnement
 {
     /**
@@ -33,21 +34,24 @@ class Abonnement
      *
      * @ORM\Column(name="debut", type="datetime", nullable=false)
      */
-    private $debut ;
+    private $debut;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fin", type="datetime", nullable=false)
      */
-    private $fin = '0000-00-00 00:00:00';
+    private $fin;
 
     /**
-     * @var string
+     * @var \TypeAbonnement
      *
-     * @ORM\Column(name="prix", type="string", length=45, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TypeAbonnement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * })
      */
-    private $prix;
+    private $type;
 
     /**
      * @var \EtatAbonnement
@@ -67,13 +71,21 @@ class Abonnement
     private $etudiant;
 
     /**
+     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     *
+     */
+    private $proprietaire;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->etudiant = new \Doctrine\Common\Collections\ArrayCollection();
         $this->debut = new \DateTime() ;
-        $this->fin = new \DateTime() ;
+        $this->fin = new \DateTime();
+        $this->fin->setTimestamp($this->debut->getTimestamp()+31536000) ;
     }
 
 
@@ -160,27 +172,27 @@ class Abonnement
     }
 
     /**
-     * Set prix
+     * Set type
      *
-     * @param string $prix
+     * @param \TK\AbonnementBundle\Entity\TypeAbonnement $type
      *
      * @return Abonnement
      */
-    public function setPrix($prix)
+    public function setType(\TK\AbonnementBundle\Entity\TypeAbonnement $type = null)
     {
-        $this->prix = $prix;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get prix
+     * Get type
      *
-     * @return string
+     * @return \TK\AbonnementBundle\Entity\TypeAbonnement
      */
-    public function getPrix()
+    public function getType()
     {
-        return $this->prix;
+        return $this->type;
     }
 
     /**
@@ -239,5 +251,25 @@ class Abonnement
     public function getEtudiant()
     {
         return $this->etudiant;
+    }
+
+    public function getOwner(){
+        return $this->etudiant[0] ;
+    }
+
+    /**
+     * @return \TK\UtilisateurBundle\Entity\Utilisateur
+     */
+    public function getProprietaire()
+    {
+        return $this->proprietaire;
+    }
+
+    /**
+     * @param \TK\UtilisateurBundle\Entity\Utilisateur $proprietaire
+     */
+    public function setProprietaire($proprietaire)
+    {
+        $this->proprietaire = $proprietaire;
     }
 }

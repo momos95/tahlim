@@ -8,9 +8,30 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tkcore/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tkcore/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tkcore/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/tkcore/css/chosen.min.css') }}">
     <script type="text/javascript" src="{{ asset('bundles/tkcore/js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/tkcore/js/bootstrap.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ asset('bundles/tkcore/js/chosen.jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/tkcore/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/tkcore/js/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+    </script>
 
 </head>
 
@@ -36,7 +57,7 @@
                     {% if is_granted('ROLE_GESTIONNAIRE') %}
 
                         <li class="nav-item {% if abonnement is defined %} active {% endif %}">
-                            <a class="nav-link" href="">Abonnements</a>
+                            <a class="nav-link" href="{{ path('tk_abonnements_homepage') }}">Abonnements</a>
                         </li>
 
                         <li class="nav-item {% if etudiant is defined %} active {% endif %}">
@@ -45,6 +66,13 @@
 
                         <li class="nav-item {% if cours is defined %} active {% endif %}">
                             <a class="nav-link" href="{{ path('tk_cours_homepage') }}">Cours</a>
+                        </li>
+
+                        <li class="nav-item {% if recitation is defined %} active {% endif %}">
+                            <a class="nav-link" href="{{ path('tk_recitation_homepage') }}">Récitateurs</a>
+                        </li>
+                        <li class="nav-item {% if media is defined %} active {% endif %}">
+                            <a class="nav-link" href="{{ path('tk_media_homepage') }}">Médiathèque</a>
                         </li>
 
                     {% endif %}

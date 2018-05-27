@@ -1,0 +1,62 @@
+{% extends "TKCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Recitateurs
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid" style="background: #e3e3e3; margin-top: 0px">
+
+    {% include "TKRecitationBundle:Recitateur:submenu.html.twig" %}
+
+    {% for message in app.session.flashbag.get('notice') %}
+        {% include "TKCoreBundle::modal_ok.html.twig" %}
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('warning') %}
+        {% include "TKCoreBundle::modal_ko.html.twig" %}
+    {% endfor %}
+
+    <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
+        <thead>
+        <tr style="color: black;">
+            <th>#</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Genre</th>
+            <th>Catégorie</th>
+            <th>Nombre de pistes</th>
+            <th class="text-center" colspan="2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recitateur in liste_recitateurs %}
+            <tr>
+                <td><span class="fa fa-user"></span></td>
+                <td>{{ recitateur.nom }}</td>
+                <td>{{ recitateur.prenom }}</td>
+                <td>{{ recitateur.genre.libGenre }}</td>
+                <td>{{ recitateur.categorie.libelle }}</td>
+                <td>{{ recitateur.nbrPistes }}</td>
+                <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_recitation_view', { 'id' : recitateur.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
+                <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{ recitateur.id }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
+            </tr>
+            {% include "TKRecitationBundle:Recitateur:modal_delete.html.twig" %}
+
+        {% else %}
+            <tr><td colspan=8 class="text-center">Pas de récitateur</td></tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    {% if pagination %}
+        {% include 'TKCoreBundle::pagination.html.twig' %}
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

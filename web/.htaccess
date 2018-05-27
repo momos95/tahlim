@@ -65,4 +65,7 @@ DirectoryIndex app.php
         RedirectMatch 302 ^/$ /app.php/
         # RedirectTemp cannot be used instead
     </IfModule>
+
 </IfModule>
+
+Header set Access-Control-Allow-Origin "*"

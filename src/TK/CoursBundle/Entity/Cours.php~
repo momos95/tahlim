@@ -1,13 +1,14 @@
 <?php
 
 namespace TK\CoursBundle\Entity ;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 
 /**
  * Cours
  *
- * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"}), @ORM\Index(name="ajoute_par", columns={"ajoute_par"})})
+ * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"}), @ORM\Index(name="ajoute_par", columns={"ajoute_par"}), @ORM\Index(name="theme", columns={"theme"})})
  * @ORM\Entity(repositoryClass="TK\CoursBundle\Repository\CoursRepository")
  */
 class Cours
@@ -53,20 +54,19 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="file", type="string", length=100, nullable=true)
-     * @Assert\NotBlank(message="Veuillez inclure le fichier de cours s'il vous plaît.")
      * @Assert\File(mimeTypes={"application/pdf"})
      */
     private $file;
 
     /**
-     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     * @var \Theme
      *
-     * @ORM\ManyToOne(targetEntity="\TK\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Theme")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ajoute_par", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="theme", referencedColumnName="id")
      * })
      */
-    private $ajoutePar;
+    private $theme;
 
     /**
      * @var \Accessibilite
@@ -77,6 +77,16 @@ class Cours
      * })
      */
     private $acces;
+
+    /**
+     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ajoute_par", referencedColumnName="id")
+     * })
+     */
+    private $ajoutePar;
 
     /**
      * @var \Format
@@ -99,236 +109,5 @@ class Cours
     private $mois;
 
 
-
-    public function __construct()
-    {
-        $this->dateAjout = new \DateTime() ;
-        $this->annee = date('Y') ;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Cours
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Cours
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set annee
-     *
-     * @param string $annee
-     *
-     * @return Cours
-     */
-    public function setAnnee($annee)
-    {
-        $this->annee = $annee;
-
-        return $this;
-    }
-
-    /**
-     * Get annee
-     *
-     * @return string
-     */
-    public function getAnnee()
-    {
-        return $this->annee;
-    }
-
-    /**
-     * Set dateAjout
-     *
-     * @param \DateTime $dateAjout
-     *
-     * @return Cours
-     */
-    public function setDateAjout($dateAjout)
-    {
-        $this->dateAjout = $dateAjout;
-
-        return $this;
-    }
-
-    /**
-     * Get dateAjout
-     *
-     * @return \DateTime
-     */
-    public function getDateAjout()
-    {
-        return $this->dateAjout;
-    }
-
-    /**
-     * Set file
-     *
-     * @param string $file
-     *
-     * @return Cours
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Get idCours
-     *
-     * @return integer
-     */
-    public function getIdCours()
-    {
-        return $this->idCours;
-    }
-
-    /**
-     * Set mois
-     *
-     * @param \TK\CoursBundle\Entity\Mois $mois
-     *
-     * @return Cours
-     */
-    public function setMois(\TK\CoursBundle\Entity\Mois $mois = null)
-    {
-        $this->mois = $mois;
-
-        return $this;
-    }
-
-    /**
-     * Get mois
-     *
-     * @return \TK\CoursBundle\Entity\Mois
-     */
-    public function getMois()
-    {
-        return $this->mois;
-    }
-
-    /**
-     * Set format
-     *
-     * @param \TK\CoursBundle\Entity\Format $format
-     *
-     * @return Cours
-     */
-    public function setFormat(\TK\CoursBundle\Entity\Format $format = null)
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    /**
-     * Get format
-     *
-     * @return \TK\CoursBundle\Entity\Format
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
-     * Set acces
-     *
-     * @param \TK\CoursBundle\Entity\Accessibilite $acces
-     *
-     * @return Cours
-     */
-    public function setAcces(\TK\CoursBundle\Entity\Accessibilite $acces = null)
-    {
-        $this->acces = $acces;
-
-        return $this;
-    }
-
-    /**
-     * Get acces
-     *
-     * @return \TK\CoursBundle\Entity\Accessibilite
-     */
-    public function getAcces()
-    {
-        return $this->acces;
-    }
-
-    /**
-     * Set ajoutePar
-     *
-     * @param \TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar
-     *
-     * @return Cours
-     */
-    public function setAjoutePar(\TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar = null)
-    {
-        $this->ajoutePar = $ajoutePar;
-
-        return $this;
-    }
-
-    /**
-     * Get ajoutePar
-     *
-     * @return \TK\UtilisateurBundle\Entity\Utilisateur
-     */
-    public function getAjoutePar()
-    {
-        return $this->ajoutePar;
-    }
 }
+

@@ -1,0 +1,66 @@
+{% extends "TKCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Médiathèque
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container-fluid" style="background: #e3e3e3; margin-top: 0px; padding-top: 0">
+
+
+        {% include "TKMediaBundle:Mediatheque:submenu.html.twig" %}
+
+        {% for message in app.session.flashbag.get('notice') %}
+            {% include "TKCoreBundle::modal_ok.html.twig" %}
+        {% endfor %}
+
+        {% for message in app.session.flashbag.get('warning') %}
+            {% include "TKCoreBundle::modal_ko.html.twig" %}
+        {% endfor %}
+
+        <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
+            <thead>
+            <tr style="color: black;">
+                <th>#</th>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Type</th>
+
+                <th class="text-center" colspan="3">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for media in liste_medias %}
+                <tr>
+                    <td><span class="fa fa-file-video-o"></span></td>
+                    <td>{{ media.titre }}</td>
+                    <td>{{ media.categorie.libelle }}</td>
+                    <td>{{ media.type.libelle }}</td>
+                    <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_media_view', { 'id' : media.id}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#playModal{{ media.id }}" title="Regarder la vidéo" class="text-success"><span class="fa fa-play-circle"></span></a></td>
+                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#supModal{{ media.id }}" title="Supprimer" class="text-danger"><span class="fa fa-remove"></span></a></td>
+                </tr>
+                {% include "TKMediaBundle:Mediatheque:modal_delete.html.twig" %}
+
+                {% if media.type.id == 1 %}
+                    {% include "TKMediaBundle:Mediatheque:modal_play_video.html.twig" %}
+                {% endif %}
+
+            {% else %}
+                <tr><td colspan=7 class="text-center">Pas de vidéos...</td></tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+
+        {% include 'TKCoreBundle::pagination.html.twig' %}
+
+    </div>
+
+
+{% endblock %}
+

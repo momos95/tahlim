@@ -11,6 +11,7 @@ namespace TK\UtilisateurBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request ;
 use Symfony\Component\HttpFoundation\Response ;
+use TK\AbonnementBundle\Entity\Abonnement;
 use TK\UtilisateurBundle\Entity\Utilisateur;
 use TK\UtilisateurBundle\Form\UtilisateurType;
 
@@ -46,6 +47,10 @@ class UtilisateurController extends Controller
     public function addAction(Request $request){
 
         $em = $this->getDoctrine()->getManager() ;
+        $typeAbonnementRepository = $em->getRepository('TKAbonnementBundle:TypeAbonnement') ;
+        $etatAbonnementRepository = $em->getRepository('TKAbonnementBundle:EtatAbonnement') ;
+        $typeAbonnement = $typeAbonnementRepository->find(1);
+        $etatAbonnement = $etatAbonnementRepository->find(1);
         $utilisateur = new Utilisateur();
         $form = $this->get('form.factory')->create(UtilisateurType::class,$utilisateur) ;
 
@@ -54,6 +59,12 @@ class UtilisateurController extends Controller
 
             if($form->isValid()){
                 $utilisateur->setMdp(sha1($utilisateur->getMdp())) ;
+                $abonnement = new Abonnement();
+                $abonnement->setCleAbonnement("sunnah_". $abonnement->getDebut()->getTimestamp());
+                $abonnement->setType($typeAbonnement);
+                $abonnement->setEtat($etatAbonnement);
+                $em->persist($abonnement) ;
+                $utilisateur->addAbonnement($abonnement);
                 $em->persist($utilisateur) ;
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.') ;
@@ -116,11 +127,19 @@ class UtilisateurController extends Controller
 
         $utilisateur = $utilisateursRepository->find($id);
 
-        $em->remove($utilisateur);
+        if(count($utilisateur->getAbonnements()) >= 1){
 
-        $em->flush();
+            $request->getSession()->getFlashBag()->add('warning', 'L\'utilisateur ne peut pas être supprimé car il possède un ou plusieurs abonnement(s).') ;
 
-        $request->getSession()->getFlashBag()->add('notice', 'L\'utilisateur a été supprimé.') ;
+        }
+        else{
+            $em->remove($utilisateur);
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'L\'utilisateur a été supprimé.') ;
+        }
+
 
         return $this->redirectToRoute('tk_utilisateur_homepage') ;
 

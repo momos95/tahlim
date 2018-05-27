@@ -1,6 +1,8 @@
 imports:
     - { resource: config.yml }
     - { resource: parameters_dev.yml }
+parameters:
+    url_image: http://localhost/tahlim/web/bundles/tkcore/images/logo192.png
 
 framework:
     router:

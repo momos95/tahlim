@@ -1,0 +1,75 @@
+<?php
+
+namespace TK\MediaBundle\Entity ;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert ;
+
+/**
+ * Media
+ *
+ * @ORM\Table(name="media", indexes={@ORM\Index(name="type", columns={"type", "categorie", "auteur"}), @ORM\Index(name="media_from_categorie", columns={"categorie"}), @ORM\Index(name="media_by_auteur", columns={"auteur"}), @ORM\Index(name="IDX_6A2CA10C8CDE5729", columns={"type"})})
+ * @ORM\Entity(repositoryClass="TK\MediaBundle\Repository\MediaRepository")
+ */
+class Media
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="titre", type="integer", nullable=false)
+     */
+    private $titre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fichier", type="string", length=150, nullable=false)
+     * @Assert\File(
+     *     mimeTypes={"video/mp4"},
+     *     mimeTypesMessage = "Veuillez vérifier l'extension de votre fichier."
+     * )
+     */
+    private $fichier;
+
+    /**
+     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="TK\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="auteur", referencedColumnName="id")
+     * })
+     */
+    private $auteur;
+
+    /**
+     * @var \CategorieMedia
+     *
+     * @ORM\ManyToOne(targetEntity="CategorieMedia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categorie", referencedColumnName="id")
+     * })
+     */
+    private $categorie;
+
+    /**
+     * @var \TypeMedia
+     *
+     * @ORM\ManyToOne(targetEntity="TypeMedia")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * })
+     */
+    private $type;
+
+
+}
+

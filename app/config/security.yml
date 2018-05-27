@@ -9,8 +9,8 @@ security:
             iterations: 1
 
     role_hierarchy:
-        ROLE_GESTIONNAIRE: ROLE_USER
-        ROLE_ADMINISTRATEUR: [ROLE_USER, ROLE_GESTIONNAIRE, ROLE_ADMIN]
+        ROLE_GESTIONNAIRE: ROLE_ETUDIANT
+        ROLE_ADMINISTRATEUR: [ROLE_GESTIONNAIRE, ROLE_ADMIN]
 
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
@@ -24,7 +24,7 @@ security:
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js|pdf)/
             security: false
 
         main_login:
@@ -45,6 +45,12 @@ security:
             logout:
                 path: logout
                 target: /login
+
+    access_control:
+        - { path: ^/utilisateurs, roles: ROLE_ADMINISTRATEUR }
+        - { path: ^/etudiants, roles: ROLE_GESTIONNAIRE }
+        - { path: ^/cours, roles: ROLE_GESTIONNAIRE }
+        - { path: ^/abonnements, roles: ROLE_GESTIONNAIRE }
 
     # activate different ways to authenticate
 

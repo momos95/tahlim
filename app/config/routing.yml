@@ -1,10 +1,18 @@
+tk_media:
+    resource: "@TKMediaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tk_recitation:
+    resource: "@TKRecitationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tk_abonnement:
     resource: "@TKAbonnementBundle/Resources/config/routing.yml"
     prefix:   /abonnements
 
 tk_cours:
     resource: "@TKCoursBundle/Resources/config/routing.yml"
-    prefix:   /cours
+    prefix:   /
 
 tk_utilisateur:
     resource: "@TKUtilisateurBundle/Resources/config/routing.yml"

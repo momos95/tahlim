@@ -1,3 +1,7 @@
-tk_abonnement_homepage:
-    path:     /
-    defaults: { _controller: TKAbonnementBundle:Default:index }
+tk_abonnements_homepage:
+    path:     /liste/{page}
+    defaults: { _controller: TKAbonnementBundle:Abonnement:all, page: 1 }
+
+tk_abonnements_add:
+    path: /add
+    defaults: { _controller: TKAbonnementBundle:Abonnement:add }

@@ -1,0 +1,60 @@
+{% extends "TKCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Cours
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container-fluid" style="background: #e3e3e3; margin-top: 0px">
+
+
+        {% include "TKAbonnementBundle:Abonnement:submenu.html.twig" %}
+
+        {% for message in app.session.flashbag.get('notice') %}
+            {% include "TKCoreBundle::modal_ok.html.twig" %}
+        {% endfor %}
+
+        <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
+            <thead>
+            <tr style="color: black;">
+                <th>Clé</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Etat</th>
+                <th>Type</th>
+                <th class="text-center" colspan="3">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for abonnement in liste_abonnements %}
+
+                <tr class="{% if abonnement.etat.idEtat == 1 %} table-success
+                           {% else %} table-warning {% endif %} ">
+                    <td>{{ abonnement.cleAbonnement }}</td>
+                    <td>{{ abonnement.debut| localizeddate('full', 'none') }}</td>
+                    <td>{{ abonnement.fin | localizeddate('full', 'none') }}</td>
+                    <td>{{ abonnement.etat.libEtatFr }}</td>
+                    <td>{{ abonnement.type.libellePrix }}</td>
+                    <td class="text-center"><a style="cursor: pointer" data-toggle="modal" data-target="#userOwnerModal{{ abonnement.idAbonnement }}" title="Etudiant correspondant" class="text-info"><span class="fa fa-user"></span></a></td>
+                </tr>
+
+            {% else %}
+                <tr><td colspan=4 class="text-center">Pas d'abonnements</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% for abonnement in liste_abonnements %}
+            {% include "TKAbonnementBundle:Abonnement:modal_user_owner.html.twig" %}
+        {% endfor %}
+
+
+        {% include 'TKCoreBundle::pagination.html.twig' %}
+
+    </div>
+
+
+{% endblock %}
+

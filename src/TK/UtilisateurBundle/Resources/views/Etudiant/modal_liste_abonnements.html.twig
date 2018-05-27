@@ -1,0 +1,47 @@
+<div id="listeAbonnementsModal{{ user.id }}" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Historique des abonnements</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr style="color: black;">
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Etat</th>
+                        <th>Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for abonnement in user.abonnements %}
+                        <tr>
+                            <td>{{ abonnement.debut| date('d/m/Y') }}</td>
+                            <td>{{ abonnement.fin | date('d/m/Y')}}</td>
+                            <td>{{ abonnement.etat.libEtatFr }}</td>
+                            <td>{{ abonnement.type.libellePrix }}</td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan=4 class="text-center">Pas d'abonnements</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

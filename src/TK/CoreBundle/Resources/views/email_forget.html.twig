@@ -1,0 +1,24 @@
+<p style="font-size: 1.5em">
+    {{ name }},<br><br>
+
+    Vous avez demandé à récupérer votre mot de passe perdu. Par conséquent, vous pouvez <a href="{{ url('login') }}">vous connecter</a> avec ce mot de passe temporaire :<b>{{ mdp }}</b>.<br>
+    Toutefois, si vous n'êtes pas à l'origine de cette demande, veuillez nous le signaler par mail le plus vite possible.
+    <br><br>
+
+    Merci pour votre confiance.<br>
+    <br>
+
+    Cordialement,
+    <br>
+
+    SUNNAH JEUNESSE.
+
+</p>
+
+<p style="text-align: center">
+
+    {# Makes an absolute URL to the /images/logo.png file #}
+    <img src="{{ image_url }}">
+
+
+</p>

@@ -2,6 +2,10 @@ imports:
     - { resource: config.yml }
     - { resource: parameters_prod.yml }
 
+parameters:
+    url_image: http://sunnah.technokocc.fr/bundles/tkcore/images/logo192.png
+
+
 #doctrine:
 #    orm:
 #        metadata_cache_driver: apc

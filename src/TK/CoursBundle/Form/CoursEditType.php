@@ -37,6 +37,13 @@ class CoursEditType extends AbstractType
                 )
             )
 
+            ->add('theme',EntityType::class,
+                array(
+                    'class'         => 'TKCoursBundle:Theme',
+                    'choice_label'  => 'libelle'
+                )
+            )
+
             ->add('acces',EntityType::class,
                 array(
                     'class'         => 'TKCoursBundle:Accessibilite',
@@ -65,7 +72,7 @@ class CoursEditType extends AbstractType
                 )
             )
 
-            ->add('Enregister',      SubmitType::class) ;
+            ->add('Enregistrer',      SubmitType::class) ;
 
     }
     

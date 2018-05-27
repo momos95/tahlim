@@ -1,0 +1,26 @@
+<div id="supModal{{ theme.id }}" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-danger">Supprimer un théme</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center text-danger">
+                    Vous êtes sur le point de supprimer le théme <b class="text-primary">"{{ theme.libelle }}"</b>.<br>
+                    Vous risquez de supprimer tous les cours de cette catégorie.<br><br>
+                    Voulez-vous vraiment continuer ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" href="{{ path('tk_cours_theme_delete',{ 'id' : theme.id }) }}">OUI</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">NON</button>
+            </div>
+        </div>
+
+    </div>
+</div>

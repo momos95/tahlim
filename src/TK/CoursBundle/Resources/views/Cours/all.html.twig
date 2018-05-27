@@ -16,25 +16,36 @@
             {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
-        <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
+        <table id="coursTable" class="display table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
             <thead>
             <tr style="color: black;">
                 <th>#</th>
                 <th>Titre</th>
                 <th>Description</th>
-                <th>Ajouté Par</th>
+                <th>Theme</th>
                 <th>Accessibilité</th>
                 <th>Date Ajout</th>
                 <th class="text-center" colspan="3">Actions</th>
             </tr>
             </thead>
+            <tfoot>
+            <tr style="color: black;">
+                <th>#</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Theme</th>
+                <th>Accessibilité</th>
+                <th>Date Ajout</th>
+                <th class="text-center" colspan="3">Actions</th>
+            </tr>
+            </tfoot>
             <tbody>
             {% for cours in liste_cours %}
                 <tr>
-                    <td>{{ cours.idCours }}</td>
+                    <td><i class="fa fa-book"></i></td>
                     <td>{{ cours.titre }}</td>
                     <td>{{ cours.description }}</td>
-                    <td>{{ cours.ajoutePar.nomPrenom }}</td>
+                    <td>{{ cours.theme.libelle }}</td>
                     <td>{{ cours.acces.libAccessibilite }}</td>
                     <td>{{ cours.dateAjout | localizeddate('full', 'none') }}</td>
                     <td class="text-center"><a style="cursor: pointer" href="{{ path('tk_cours_edit', { 'id' : cours.idCours}) }}" title="Modifier" class="text-info"><span class="fa fa-edit"></span></a></td>
@@ -54,6 +65,11 @@
 
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#coursTable').DataTable();
+        } );
+    </script>
 
 {% endblock %}
 

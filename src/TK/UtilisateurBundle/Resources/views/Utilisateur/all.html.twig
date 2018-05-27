@@ -16,6 +16,10 @@
             {% include "TKCoreBundle::modal_ok.html.twig" %}
         {% endfor %}
 
+        {% for message in app.session.flashbag.get('warning') %}
+            {% include "TKCoreBundle::modal_ko.html.twig" %}
+        {% endfor %}
+
         <table class="table table-striped table-hover table-bordered" style="border:1px solid #CCC;background: #FFF;color:#666;">
             <thead>
             <tr style="color: black;">

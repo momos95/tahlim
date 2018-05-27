@@ -1,5 +1,6 @@
 <?php
 
+
 namespace TK\AbonnementBundle\Entity ;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Abonnement
  *
- * @ORM\Table(name="abonnement", indexes={@ORM\Index(name="etat_in_assos_idx", columns={"etat"})})
- * @ORM\Entity(repositoryClass="TK\AbonnementBundle\Repository\AbonnementRepository")
+ * @ORM\Table(name="abonnement", indexes={@ORM\Index(name="etat_in_assos_idx", columns={"etat"}), @ORM\Index(name="type", columns={"type"})})
+ * @ORM\Entity
  */
 class Abonnement
 {
@@ -33,21 +34,24 @@ class Abonnement
      *
      * @ORM\Column(name="debut", type="datetime", nullable=false)
      */
-    private $debut ;
+    private $debut;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fin", type="datetime", nullable=false)
      */
-    private $fin = '0000-00-00 00:00:00';
+    private $fin;
 
     /**
-     * @var string
+     * @var \TypeAbonnement
      *
-     * @ORM\Column(name="prix", type="string", length=45, nullable=true)
+     * @ORM\ManyToOne(targetEntity="TypeAbonnement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * })
      */
-    private $prix;
+    private $type;
 
     /**
      * @var \EtatAbonnement
@@ -62,7 +66,7 @@ class Abonnement
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Utilisateur", mappedBy="abonnements")
+     * @ORM\ManyToMany(targetEntity="\TK\UtilisateurBundle\Entity\Utilisateur", mappedBy="abonnements")
      */
     private $etudiant;
 
@@ -72,6 +76,9 @@ class Abonnement
     public function __construct()
     {
         $this->etudiant = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->debut = new \DateTime() ;
+        $this->fin = new \DateTime();
+        $this->fin->setTimestamp($this->debut->getTimestamp()+31536000) ;
     }
 
 }

@@ -402,6 +402,9 @@ class Utilisateur implements UserInterface
      */
     public function addAbonnement(\TK\AbonnementBundle\Entity\Abonnement $abonnement)
     {
+        if(empty($this->abonnements) || count($this->abonnements) == 0)
+            $this->abonnementEtat = $abonnement->getEtat() ;
+
         $this->abonnements[] = $abonnement;
 
         return $this;

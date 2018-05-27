@@ -6,39 +6,20 @@
 
 {% block body %}
     <div class="container">
+
+        {% if  is_granted('ROLE_GESTIONNAIRE') or is_granted('ROLE_ADMINISTRATEUR') %}
         <div class="jumbotron">
             <h1 class="display-3">SUNNAH</h1>
             <p>Ici vous pourrez gérer l'ensemble des entités de l'application mobile SUNNAH et d'en assurer le suivi.</p>
             <p><a class="btn btn-info btn-lg" href="">Lire la documentation...</a></p>
         </div>
-
+        {% endif %}
 
         <div class="row equal-height">
 
             {% if is_granted('ROLE_ADMINISTRATEUR') %}
-                <div class="col-md-4 col-xs-6" >
-                    <div class="thumbnail">
-                        <a href="{{ path('tk_cours_homepage') }}" >
-                            <img src="{{ asset('bundles/tkcore/images/livres.jpg') }}"  alt="" class="img-responsive img-thumbnail">
-                        </a>
-                        <div class="caption">
-                            <h4 class="text-center"><a href="{{ path('tk_cours_homepage') }}" class="text-success">Gestion des Cours</a></h4>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4 col-xs-6">
-                    <div class="thumbnail">
-                        <a href="{{ path('tk_etudiant_homepage') }}">
-                            <img src="{{ asset('bundles/tkcore/images/classes.jpg') }}" height="367px" alt="" class="img-responsive img-thumbnail">
-                        </a>
-                        <div class="caption">
-                            <h4 class="text-center"><a href="{{ path('tk_etudiant_homepage') }}" class="text-warning">Gestion des Etudiants</a></h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-xs-6">
+                <div class="col-md-3">
                     <div class="thumbnail">
                         <a href="{{ path('tk_utilisateur_homepage') }}" >
                             <img src="{{ asset('bundles/tkcore/images/users.png') }}" alt="" class="img-responsive img-thumbnail">
@@ -48,8 +29,10 @@
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <div class="col-md-4">
+
+            {% endif %}
+            {% if is_granted('ROLE_GESTIONNAIRE') %}
+                <div class="col-md-3">
                     <div class="thumbnail">
                         <a href="{{ path('tk_cours_homepage') }}" >
                             <img src="{{ asset('bundles/tkcore/images/livres.jpg') }}" alt="" class="img-responsive img-thumbnail">
@@ -60,9 +43,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="{{ path('tk_etudiant_homepage') }} >
+                        <a href="{{ path('tk_etudiant_homepage') }}" >
                             <img src="{{ asset('bundles/tkcore/images/classes.jpg') }}" alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
@@ -71,16 +54,17 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="thumbnail">
-                        <a href="" >
-                            <img src="{{ asset('bundles/tkcore/images/cours.jpg') }}" alt="" class="img-responsive img-thumbnail">
+                        <a href="{{ path('tk_recitation_homepage') }}" >
+                            <img src="{{ asset('bundles/tkcore/images/sound.jpg') }}" alt="" class="img-responsive img-thumbnail">
                         </a>
                         <div class="caption">
-                            <h4 class="text-center"><a href="" class="text-info">Aide</a></h4>
+                            <h4 class="text-center"><a href="{{ path('tk_recitation_homepage') }}" class="text-warning">Gestion des Récitateurs</a></h4>
                         </div>
                     </div>
                 </div>
+
             {% endif %}
 
 

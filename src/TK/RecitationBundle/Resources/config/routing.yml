@@ -1,0 +1,35 @@
+tk_recitation_homepage:
+    path:     /recitateurs/liste/{page}
+    defaults: { _controller: TKRecitationBundle:Recitateur:all, page:1 }
+
+tk_recitation_add:
+    path: /recitateurs/add
+    defaults : { _controller: TKRecitationBundle:Recitateur:add }
+
+tk_recitation_view:
+    path:     /recitateurs/view/{id}
+    defaults:
+        _controller: TKRecitationBundle:Recitateur:view
+    requirements:
+        id: \d+
+
+tk_recitation_delete:
+    path: /recitateur/delete/{id}
+    defaults:
+        _controller: TKRecitationBundle:Recitateur:delete
+    requirements:
+        id: \d+
+
+tk_recitation_addsound:
+    path: /recitateur/addsound/{id}
+    defaults:
+        _controller: TKRecitationBundle:Recitateur:addsound
+    requirements:
+        id: \d+
+
+tk_recitation_deletesound:
+    path: /recitateur/deletesound/{id}
+    defaults:
+        _controller: TKRecitationBundle:Recitateur:deletesound
+    requirements:
+        id: \d+

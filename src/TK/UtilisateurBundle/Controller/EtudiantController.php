@@ -138,11 +138,20 @@ class EtudiantController extends Controller
 
         $etudiant = $etudiantsRepository->find($id);
 
-        $em->remove($etudiant);
+        if(count($etudiant->getAbonnements()) >= 1){
 
-        $em->flush();
+            $request->getSession()->getFlashBag()->add('warning', 'L\'étudiant ne peut pas être supprimé car il possède un ou plusieurs abonnement(s).') ;
 
-        $request->getSession()->getFlashBag()->add('notice', 'L\'étudiant a été supprimé.') ;
+        }
+        else{
+            $em->remove($etudiant);
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'L\'étudiant a été supprimé.') ;
+        }
+
+
 
         return $this->redirectToRoute('tk_etudiant_homepage') ;
 

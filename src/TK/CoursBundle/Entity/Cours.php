@@ -1,13 +1,14 @@
 <?php
 
 namespace TK\CoursBundle\Entity ;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ;
 
 /**
  * Cours
  *
- * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"}), @ORM\Index(name="ajoute_par", columns={"ajoute_par"})})
+ * @ORM\Table(name="cours", indexes={@ORM\Index(name="format_in_assos_idx", columns={"format"}), @ORM\Index(name="mois_in_assos_idx", columns={"mois"}), @ORM\Index(name="acces_in_assos_idx", columns={"acces"}), @ORM\Index(name="ajoute_par", columns={"ajoute_par"}), @ORM\Index(name="theme", columns={"theme"})})
  * @ORM\Entity(repositoryClass="TK\CoursBundle\Repository\CoursRepository")
  */
 class Cours
@@ -58,14 +59,14 @@ class Cours
     private $file;
 
     /**
-     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     * @var \Theme
      *
-     * @ORM\ManyToOne(targetEntity="\TK\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Theme")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ajoute_par", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="theme", referencedColumnName="id")
      * })
      */
-    private $ajoutePar;
+    private $theme;
 
     /**
      * @var \Accessibilite
@@ -76,6 +77,16 @@ class Cours
      * })
      */
     private $acces;
+
+    /**
+     * @var \TK\UtilisateurBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="TK\UtilisateurBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ajoute_par", referencedColumnName="id")
+     * })
+     */
+    private $ajoutePar;
 
     /**
      * @var \Format
@@ -98,12 +109,12 @@ class Cours
     private $mois;
 
 
-
     public function __construct()
     {
         $this->dateAjout = new \DateTime() ;
         $this->annee = date('Y') ;
     }
+
 
     /**
      * Set titre
@@ -284,6 +295,30 @@ class Cours
     }
 
     /**
+     * Set ajoutePar
+     *
+     * @param \TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar
+     *
+     * @return Cours
+     */
+    public function setAjoutePar(\TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar = null)
+    {
+        $this->ajoutePar = $ajoutePar;
+
+        return $this;
+    }
+
+    /**
+     * Get ajoutePar
+     *
+     * @return \TK\UtilisateurBundle\Entity\Utilisateur
+     */
+    public function getAjoutePar()
+    {
+        return $this->ajoutePar;
+    }
+
+    /**
      * Set acces
      *
      * @param \TK\CoursBundle\Entity\Accessibilite $acces
@@ -308,26 +343,26 @@ class Cours
     }
 
     /**
-     * Set ajoutePar
+     * Set theme
      *
-     * @param \TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar
+     * @param \TK\CoursBundle\Entity\Theme $theme
      *
      * @return Cours
      */
-    public function setAjoutePar(\TK\UtilisateurBundle\Entity\Utilisateur $ajoutePar = null)
+    public function setTheme(\TK\CoursBundle\Entity\Theme $theme = null)
     {
-        $this->ajoutePar = $ajoutePar;
+        $this->theme = $theme;
 
         return $this;
     }
 
     /**
-     * Get ajoutePar
+     * Get theme
      *
-     * @return \TK\UtilisateurBundle\Entity\Utilisateur
+     * @return \TK\CoursBundle\Entity\Theme
      */
-    public function getAjoutePar()
+    public function getTheme()
     {
-        return $this->ajoutePar;
+        return $this->theme;
     }
 }

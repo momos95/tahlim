@@ -1,0 +1,23 @@
+tk_media_homepage:
+    path:     /medias/liste/{page}
+    defaults: { _controller: TKMediaBundle:Mediatheque:all, page: 1 }
+    requirements:
+        page: \d+
+
+
+tk_media_add:
+    path:     /medias/add
+    defaults: { _controller: TKMediaBundle:Mediatheque:add }
+
+tk_media_view:
+    path:     /medias/view/{id}
+    defaults: { _controller: TKMediaBundle:Mediatheque:view }
+    requirements:
+        id: \d+
+
+tk_media_delete:
+    path:     /media/delete/{id}
+    defaults: { _controller: TKMediaBundle:Mediatheque:delete }
+    requirements:
+        id: \d+
+

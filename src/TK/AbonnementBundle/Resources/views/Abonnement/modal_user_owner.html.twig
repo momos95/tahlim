@@ -1,0 +1,63 @@
+<div id="userOwnerModal{{ abonnement.idAbonnement }}" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">{{ abonnement.owner.nomPrenom }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class=" col-md-12 col-lg-12 ">
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td>Date de naissance</td>
+                                <td>{{ abonnement.owner.dateNaissance | date('d/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Genre</td>
+                                <td>{{ abonnement.owner.sexe.libGenre }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Email</td>
+                                <td><a href="mailto:{{ abonnement.owner.email }}">{{ abonnement.owner.email }}</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Date d'inscription</td>
+                                <td>{{ abonnement.owner.dateInscription | date('d/m/Y H:i:s')}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Etat d'abonnement</td>
+                                <td>
+                                    <span class="badge {% if abonnement.owner.abonnementEtat.idEtat == 1 %} badge-success {% else %} badge-danger {% endif %}">
+                                          {{ abonnement.owner.abonnementEtat.libEtatFr}}
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="{{ path('tk_etudiant_view',{ 'id' : abonnement.owner.id }) }}">Voir le profil</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -42,6 +42,13 @@ class CoursType extends AbstractType
                 )
             )
 
+            ->add('theme',EntityType::class,
+                array(
+                    'class'         => 'TKCoursBundle:Theme',
+                    'choice_label'  => 'libelle'
+                )
+            )
+
             ->add('mois',EntityType::class,
                 array(
                     'class'         => 'TKCoursBundle:Mois',
@@ -49,7 +56,7 @@ class CoursType extends AbstractType
                 )
             )
 
-            ->add('Enregister',      SubmitType::class) ;
+            ->add('Enregistrer',      SubmitType::class) ;
 
     }
     
